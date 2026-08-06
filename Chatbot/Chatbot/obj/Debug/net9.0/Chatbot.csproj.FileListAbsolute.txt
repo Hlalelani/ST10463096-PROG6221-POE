@@ -1,0 +1,15 @@
+C:\Users\Student\Documents\Visual Studio 2022\ST10463096-PROG6221-POE\Chatbot\Chatbot\bin\Debug\net9.0\Chatbot.exe
+C:\Users\Student\Documents\Visual Studio 2022\ST10463096-PROG6221-POE\Chatbot\Chatbot\bin\Debug\net9.0\Chatbot.deps.json
+C:\Users\Student\Documents\Visual Studio 2022\ST10463096-PROG6221-POE\Chatbot\Chatbot\bin\Debug\net9.0\Chatbot.runtimeconfig.json
+C:\Users\Student\Documents\Visual Studio 2022\ST10463096-PROG6221-POE\Chatbot\Chatbot\bin\Debug\net9.0\Chatbot.dll
+C:\Users\Student\Documents\Visual Studio 2022\ST10463096-PROG6221-POE\Chatbot\Chatbot\bin\Debug\net9.0\Chatbot.pdb
+C:\Users\Student\Documents\Visual Studio 2022\ST10463096-PROG6221-POE\Chatbot\Chatbot\obj\Debug\net9.0\Chatbot.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Student\Documents\Visual Studio 2022\ST10463096-PROG6221-POE\Chatbot\Chatbot\obj\Debug\net9.0\Chatbot.AssemblyInfoInputs.cache
+C:\Users\Student\Documents\Visual Studio 2022\ST10463096-PROG6221-POE\Chatbot\Chatbot\obj\Debug\net9.0\Chatbot.AssemblyInfo.cs
+C:\Users\Student\Documents\Visual Studio 2022\ST10463096-PROG6221-POE\Chatbot\Chatbot\obj\Debug\net9.0\Chatbot.csproj.CoreCompileInputs.cache
+C:\Users\Student\Documents\Visual Studio 2022\ST10463096-PROG6221-POE\Chatbot\Chatbot\obj\Debug\net9.0\Chatbot.sourcelink.json
+C:\Users\Student\Documents\Visual Studio 2022\ST10463096-PROG6221-POE\Chatbot\Chatbot\obj\Debug\net9.0\Chatbot.dll
+C:\Users\Student\Documents\Visual Studio 2022\ST10463096-PROG6221-POE\Chatbot\Chatbot\obj\Debug\net9.0\refint\Chatbot.dll
+C:\Users\Student\Documents\Visual Studio 2022\ST10463096-PROG6221-POE\Chatbot\Chatbot\obj\Debug\net9.0\Chatbot.pdb
+C:\Users\Student\Documents\Visual Studio 2022\ST10463096-PROG6221-POE\Chatbot\Chatbot\obj\Debug\net9.0\Chatbot.genruntimeconfig.cache
+C:\Users\Student\Documents\Visual Studio 2022\ST10463096-PROG6221-POE\Chatbot\Chatbot\obj\Debug\net9.0\ref\Chatbot.dll
