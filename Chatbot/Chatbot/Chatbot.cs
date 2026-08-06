@@ -103,6 +103,54 @@ namespace CybersecurityChatbot
 
                     continue;
                 }
+                ProcessUserInput(userInput);
             }
+        }
+        private void ProcessUserInput(string input)
+        {
+            string lowerInput = input.ToLower().Trim();
+
+            if (lowerInput == "exit" || lowerInput == "quit" ||lowerInput == "bye")
+            {
+                uiManager.DisplayChatbotMessage($"Goodbye {userName}! Stay safe online!");
+                isRunning = false;
+                return;
+            }
+            if (lowerInput == "help" || lowerInput == "menu" || lowerInput == "options")
+            {
+                DisplayHelp();
+                return;
+            }
+
+            string response = responseHandler.GetResponse(lowerInput, userName);
+
+            if ( (response != null)
+                {
+                uiManager.DisplayChatbotMessage(response);
+            }
+            else {
+                uiManager.DisplayDefaultResponse();
+                
+                
+            }
+               
+            }
+        private void DisplayHelp()
+        {
+            uiManager.DisplaySeparator();
+
+            uiManager.DisplayColoredText("What can I help you?", ConsoleColor.Cyan);
+            uiManager.DisplayColoredText(" - password safety", ConsoleColor.White);
+            uiManager.DisplayColoredText(" - phishing scams ", ConsoleColor.White);
+            uiManager.DisplayColoredText(" - Safe browsing", ConsoleColor.White);
+            uiManager.DisplayColoredText("- Social engineering", ConsoleColor.White) ;
+            uiManager.DisplayColoredText(" - Tow-factor authentication", ConsoleColor.White) ;
+            uiManager.DisplayColoredText(" - General cybersecurity tips", ConsoleColor.White);
+
+            uiManager.DisplayChatbotMessage("Just ask me about any of these topics!");
+            uiManager.DisplayColoredText("\nType 'exit' tp leave or 'help' to see this menu again.", ConsoleColor.Gray);
+
+            uiManager.DisplaySeparator();
+        }
         }
 }
