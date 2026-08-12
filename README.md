@@ -22,3 +22,8 @@ A C# console chatbot designed to educate South African citizens about cybersecur
 - Clean code structure with separate classes
 
 ## Requirements
+- .NET 9.0 SDK or later
+- Visual Studio Code or Visual Studio 2022
+- System.Windows.Extensions NuGet package
+
+  ## Setup and Installation
