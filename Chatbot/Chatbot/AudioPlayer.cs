@@ -60,6 +60,24 @@ namespace CybersecurityChatbot
             }
         }
 
+        public void PlaySound(string filePath)
+        {
+            try
+            {
+                if(File.Exists(filePath))
+                {
+                    using (SoundPlayer player = new SoundPlayer(filePath))
+                    {
+                        player.Play();
+                    }
+                }
+            }
+            catch(Exception )
+            {
+
+            }
+        }
+
         
 
     }
