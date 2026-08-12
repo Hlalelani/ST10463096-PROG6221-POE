@@ -26,4 +26,5 @@ A C# console chatbot designed to educate South African citizens about cybersecur
 - Visual Studio Code or Visual Studio 2022
 - System.Windows.Extensions NuGet package
 
-  ## Setup and Installation
+## Setup and Installation
+- clone the repository
