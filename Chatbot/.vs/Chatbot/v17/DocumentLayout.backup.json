@@ -42,9 +42,9 @@
               "Title": "ResponseHandler.cs",
               "DocumentMoniker": "C:\\Users\\Student\\Documents\\Visual Studio 2022\\ST10463096-PROG6221-POE\\Chatbot\\Chatbot\\ResponseHandler.cs",
               "RelativeDocumentMoniker": "Chatbot\\ResponseHandler.cs",
-              "ToolTip": "C:\\Users\\Student\\Documents\\Visual Studio 2022\\ST10463096-PROG6221-POE\\Chatbot\\Chatbot\\ResponseHandler.cs",
-              "RelativeToolTip": "Chatbot\\ResponseHandler.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAQwCUAAAA1AAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\Student\\Documents\\Visual Studio 2022\\ST10463096-PROG6221-POE\\Chatbot\\Chatbot\\ResponseHandler.cs*",
+              "RelativeToolTip": "Chatbot\\ResponseHandler.cs*",
+              "ViewState": "AgIAAA0AAAAAAAAAAAA1wDAAAAC6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-08-11T13:18:00.123Z",
               "EditorCaption": ""
@@ -59,21 +59,19 @@
               "RelativeToolTip": "Chatbot\\AudioPlayer.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAEwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-11T12:24:04.025Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-11T12:24:04.025Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Chatbot",
+              "Title": "Chatbot.csproj",
               "DocumentMoniker": "C:\\Users\\Student\\Documents\\Visual Studio 2022\\ST10463096-PROG6221-POE\\Chatbot\\Chatbot\\Chatbot.csproj",
               "RelativeDocumentMoniker": "Chatbot\\Chatbot.csproj",
               "ToolTip": "C:\\Users\\Student\\Documents\\Visual Studio 2022\\ST10463096-PROG6221-POE\\Chatbot\\Chatbot\\Chatbot.csproj",
               "RelativeToolTip": "Chatbot\\Chatbot.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-08-11T12:20:30.93Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-11T12:20:30.93Z"
             },
             {
               "$type": "Document",
@@ -85,8 +83,7 @@
               "RelativeToolTip": "Chatbot\\Chatbot.cs",
               "ViewState": "AgIAAIoAAAAAAAAAAAAmwJgAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-06T12:21:39.603Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-06T12:21:39.603Z"
             },
             {
               "$type": "Document",
@@ -98,8 +95,7 @@
               "RelativeToolTip": "Chatbot\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-06T12:04:17.003Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-06T12:04:17.003Z"
             }
           ]
         }
