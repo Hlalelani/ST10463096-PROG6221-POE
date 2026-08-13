@@ -88,7 +88,7 @@ namespace CybersecurityChatbot
                 "code sent to your phone or an authenticator app. Always enable 2FA when it's available!" },
                 {"Multi factor authentication","Multi-factor authetication(MFA) uses multiple verification methods. this could include something you know(password), something you have" +
                 "(phone) and  something you are(fingerprint). The more layers the better!" },
-                {"2fa","Two-factor authentication is one of the best ways to protect your accounts! Use authenticat or apps like Google Authenticator or Authy for the most secure exper" },
+                {"2fa","Two-factor authentication is one of the best ways to protect your accounts! Use authenticat or apps like Google Authenticator or Authy for the most secure experience." },
             };
         }
 
