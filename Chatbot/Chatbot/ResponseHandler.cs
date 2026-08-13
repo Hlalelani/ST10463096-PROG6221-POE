@@ -88,10 +88,65 @@ namespace CybersecurityChatbot
                 "code sent to your phone or an authenticator app. Always enable 2FA when it's available!" },
                 {"Multi factor authentication","Multi-factor authetication(MFA) uses multiple verification methods. this could include something you know(password), something you have" +
                 "(phone) and  something you are(fingerprint). The more layers the better!" },
-                {"2fa","Two-factor authentication is one of the best ways to protect your accounts! Use authenticat or apps like Google Authenticator or Authy for the most secure experience." },
+                {"2fa","Two-factor authentication is one of the best ways to protect your accounts! Use authenticat or apps like Google Authenticator or Authy for the most secure " +
+                "exprerience. SMS based 2FA is better than nothing, but app based is more secure." },
+
+                // General acknowledgment
+                {"Okay", "Great! is there anything specific you'd like to learn about?" },
+                {"Ok","Awesome! what cybersecurity topic interests you?" },
+                {"Yes","Excellent! what would you like to know more about?" },
+                {"No","No worries! when never you're ready,  I'm here to help with cybersecurity awreness." },
+                {"thank you", "You're welcom! Stay safe online and remember, cyberesecurity is everyone's responsibility!" },
+                {"thanks", "You're Welcome! feel free to come back anytime if you have more cybersecurity question." },
             };
         }
 
+        public string GetResponse(string input, string userName)
+        {
+            foreach(var pair in responses)
+            {
+                if (input.Contains(pair.Key.ToLower()))
+                {
+                    return pair.Value;  
+                }
+            }
+
+            if (input.Contains("how") && input.Contains("you"))
+            {
+                return responses.ContainsKey("how are you") ? responses["how are you"] : null;
+            }
+            if(input.Contains("password") && input.Contains("safe"))
+            {
+                return responses["password safety"];
+            }
+            if (input.Contains("phish") || input.Contains("scam"))
+            {
+                return responses["phishing"];
+            }
+            if(input.Contains("brows") || input.Contains("web") || input.Contains("internet"))
+            {
+                return responses["safe browsing"];
+            }
+            if (input.Contains("social") && input.Contains("engineer"))
+            {
+                return responses["social engineering"];
+            }
+            if (input.Contains("2fa") || input.Contains("tow factor"))
+            {
+                return responses["2fa"];
+            }
+
+            foreach (var key in responses.Keys)
+            {
+                if (input.Contains(key))
+                {
+                    return responses[key];
+                }
+            }
+
+            return null;
+        }
+         
 
 
 
