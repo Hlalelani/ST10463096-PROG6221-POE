@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-
 
 namespace CybersecurityChatbot
 {
@@ -9,146 +7,104 @@ namespace CybersecurityChatbot
     {
         private Dictionary<string, string> responses;
 
-        private Random random;
-
         public ResponseHandler()
         {
-            random = new Random();
             InitializeResponses();
         }
+
         private void InitializeResponses()
         {
             responses = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
             {
-                // greeting
-                {"hello", "Hello there! how can i help you stay safe online today? " },
-                {"hi", "Hi! Ready to learn about cybersecrity?"},
-                {"hey", "Hey! lets talk about online safety." },
+                // ----- Greetings -----
+                { "hello", "Hello there! How can I help you stay safe online today?" },
+                { "hi", "Hi! Ready to learn about cybersecurity?" },
+                { "hey", "Hey! Let's talk about online safety." },
 
-                // status question
-                {"how are you", "i'm doing great! Always ready to help you stay secure online. How are you doing today?"},
-                {"how are you doing", "i'm functioning perfectly! Cybersecurity is my passion. what would you like to learn about?" },
+                // ----- Status & Purpose -----
+                { "how are you", "I'm doing great! Always ready to help you stay secure online. How are you doing today?" },
+                { "how are you doing", "I'm functioning perfectly! Cybersecurity is my passion. What would you like to learn about?" },
+                { "what is your purpose", "My purpose is to educate and protect South African citizens from cyber threats. I help people understand how to stay safe online!" },
+                { "what can you do", "I can teach you about password safety, phishing scams, safe browsing habits, social engineering, and much more!" },
+                { "what can i ask you about", "You can ask me about passwords, phishing, safe browsing, social engineering, two-factor authentication, and general cybersecurity tips." },
 
-                // purpose question
-                {"what is your purpose","my purose is to educate and protect South African citizens from cyber threats. I help people understand how to stay safe online!" },
-                {"what can you do",  " I can teach you about password safety, phishing scams, safe browsing habits, social engineering and much more!"},
-                {"what can i ask you about", "you can ask me about passwords, phishing emails, safe browsing, social engineerung, two-factor authentication," +
-                "general cybersecurity tips and how to spot suspicious links! " },
+                // ----- Password Topics -----
+                { "password", "A strong password should be at least 12 characters long and include uppercase, lowercase, numbers, and special symbols. Never reuse passwords across different websites!" },
+                { "password tips", "🔐 Password tips:\n• Use unique passwords for each account\n• Make them at least 12 characters long\n• Include uppercase, lowercase, numbers, and symbols\n• Consider using a password manager\n• Enable two-factor authentication when possible" },
+                { "password manager", "Password managers are excellent tools! They generate and store complex passwords for you. Popular options include LastPass, 1Password, and Bitwarden." },
+                { "password safety", "🔐 Password safety is crucial! Use a mix of characters, avoid personal information, change passwords regularly, and never share them with anyone." },
 
-                //about password creating and safe users
-                {"password", "A strong password should be at least 12 characters long and include uppercase letters, lowercase letters, numbers and special symbols." +
-                "Never reuse passwords across different websites!"},
-                {"password","password safety tips:\n Use unique passwords for each account\n Make them at least 1 2 characters long\n Include uppercase, lowercase, numbers, and " +
-                "symbols\n Consider using a password manager\n Enable two-factor authentication when possible" },
-                {"password manager","Password managers are excellent tools! They generate and store complex passwords for you. Popular options include LastPass, 1Password, and " +
-                "Bitwarden. Just remember to use a strong master password!" },
-                {"Password safety", "Password safety is crucial! Use a mix of characters, avoid personal information, change password regularly, and naver share them with anyone." +
-                "Consider using multi-factor authentication for extra security" },
+                // ----- Phishing Topics -----
+                { "phishing", "📧 Phishing is when scammers pretend to be legitimate organizations to steal your personal information. Never click on suspicious links or download attachments from unknown senders." },
+                { "phishing email", "📧 Signs of a phishing email:\n• Urgent language demanding immediate action\n• Suspicious sender email addresses\n• Poor grammar and spelling\n• Requests for personal information\n• Unexpected attachments or links" },
+                { "phishing scam", "🛑 Phishing scams are dangerous! Always verify requests for sensitive information through official channels. When in doubt, contact the organization directly." },
 
-                // Phishing topics
-                {"phishing","phishing is when scammers pretend to be legitimate organizations to steal your personal information. Never click on suspicious link or download attachments " +
-                "from unknown senders. Always check the senders email address carefully!" },
-                {"phishing email", "Signs of phishing email:\n Urgent language demanding immediate action\n Suspicious sender email addresses\n poor grammar and spelling\n" +
-                "Requests for personal information\n Unexpected attachments or links" },
-                {"Phishing scam", "Phishing scams are dangerous! always verify requests for sensitive information through official channels. When in doubt, conntact the organization" +
-                "directly using their official website or phone number." },
+                // ----- Safe Browsing -----
+                { "browsing", "🔒 Safe browsing habits:\n• Always look for 'https' in the URL\n• Check for the padlock icon in the address bar\n• Don't click on suspicious pop-ups\n• Keep your browser updated" },
+                { "safe browsing", "🛡️ Tips for safe browsing:\n• Use a reputable browser with security features\n• Clear your cache and cookies regularly\n• Be cautious when using public Wi-Fi\n• Use a VPN for additional privacy" },
+                { "browser safety", "🌐 Browser safety is essential! Keep your browser updated, use security extensions, and be careful what you download." },
 
-                // safety of browsing online
+                // ----- Social Engineering -----
+                { "social engineering", "🎯 Social engineering is when attackers manipulate people into giving away sensitive information. They might pretend to be IT support, a colleague, or a trusted organization. Always verify identities before sharing information!" },
+                { "social engineering attack", "⚠️ Social engineering attacks can happen through phone calls, emails, or even in person. If someone asks for your password or personal information, take a moment to verify their identity." },
 
-                {"Browsing",  "Safe browsing haits:\n Always look for'https' in the URL\n Check for the padlock icon in the address bar\n Dont click on suspicious pop-ups\n keep your" +
-                "browser updated\n Use ad-blockers and privacy extensions" },
-                {"safe browsing","Tips for safe browsing:\n Use reputable browser with security features\n Clear your cache and cookies regularly\n Be cautious when using public" +
-                "Wi-fi\n Use a VPN for additional privacy"},
-                {"Browser Safety","Browser safety is essential! keep your browser updated, use security extensions and be careful what you download. Consider uaing browsers with" +
-                "build in security features like chrome or firefox with security add-ons." },
+                // ----- Suspicious Links -----
+                { "suspicious link", "⚠️ Suspicious links often have:\n• Misspelled domain names (like gooogle.com)\n• Strange characters or numbers\n• Hidden URLs when you hover over them\n• Urgent language in the message\n\nAlways hover over links to see the real destination before clicking!" },
+                { "link", "🔗 Be careful with links in emails and messages. Check the URL before clicking. Scammers use URL shortening and domain spoofing to trick you." },
 
-                //Social engineering
-                {"Social engineering","Social engineering is when attackers manipulate people into giving away sensitive information. They might pretend to be IT support, a colleague" +
-                "Always verify identities before sharing information!" },
-                {"Social engineering at tack","Social enginnering attacks can happen through phone calls, emails or even in person. if someone asks for your password or personal " +
-                "information, take a moment to verify their identity. Legitimate organizations won't ask for sensitive information unexpected. " },
+                // ----- Two‑Factor Authentication -----
+                { "two factor authentication", "📱 Two-factor authentication (2FA) adds an extra layer of security. Even if someone gets your password, they'll need a second verification method like a code sent to your phone or an authenticator app. Always enable 2FA when it's available!" },
+                { "multi factor authentication", "🔐 Multi-factor authentication (MFA) uses multiple verification methods. This could include something you know (password), something you have (phone), and something you are (fingerprint). The more layers, the better!" },
+                { "2fa", "📱 Two-factor authentication is one of the best ways to protect your accounts! Use authenticator apps like Google Authenticator or Authy for the most secure experience." },
 
-                // Suspicious links
-                {"Suspicious link","Suspicious links often have:\n Misspelled domain names(like gooogle.com)\n Strange characters or numbers\n Hidden URLs when you hover over them\n" +
-                "Urgent language in the message\n\nAlways hover over links to see the real destination before clicking!" },
-                {"link","Be careful with links in emails and messages. Check the URL before clicking. Scammers use trchiques like URL shortening and domain spoofing to trick you. When in " +
-                "doubt, type the website address manually in your browser." },
+                // ----- General Tips -----
+                { "cybersecurity", "🔒 Cybersecurity is everyone's responsibility! Key practices include:\n• Use strong, unique passwords\n• Keep software updated\n• Be careful what you click\n• Use antivirus software\n• Back up your data regularly" },
+                { "cybersecurity tips", "🛡️ Top cybersecurity tips for South Africans:\n• Don't share personal information on social media\n• Be cautious with public Wi-Fi\n• Regularly check your bank statements\n• Use security software\n• Stay informed about common scams" },
+                { "tips", "💡 General cybersecurity tips:\n• Think before you click\n• Question unusual requests\n• Protect your personal information\n• Keep devices updated\n• Use security software" },
 
-                // General tips
-                {"Cybersecurity","Cybersecurity is everyone's responsibility! Key parctices include:\n Use strong, unique passwords\n keep software updated\n Be careful what you click\n " +
-                "Use antivirus software\n Back up your data regularly." },
-                {"Cybersecurity tips","Top cybersecurity tips for south Africans:\n Don't share personal information on social media\n Be cautious with public Wi-fi\n Regularly check your" +
-                "bank statements\n Use security software\n stay informed about common scams" },
-                {"Tips", "General cybersecurity tips\n Think before you click\n Question unusual requests\n protect your personal information\n keep devices updated\n use a security tool" +
-                "or antivirus" },
-                {"Helps","I'm here to help! you can ask me about passwords, pjishing, safe browsing, social engineering or tow-factor authentication. what would you like to learn about?" },
-
-                // Tow-factor authentication
-                {"two factor authentication","Two-factor authentication(2FA) adds an extra layer of security. Even if someone gets your password, they'll need a second verification method like a " +
-                "code sent to your phone or an authenticator app. Always enable 2FA when it's available!" },
-                {"Multi factor authentication","Multi-factor authetication(MFA) uses multiple verification methods. this could include something you know(password), something you have" +
-                "(phone) and  something you are(fingerprint). The more layers the better!" },
-                {"2fa","Two-factor authentication is one of the best ways to protect your accounts! Use authenticat or apps like Google Authenticator or Authy for the most secure " +
-                "exprerience. SMS based 2FA is better than nothing, but app based is more secure." },
-
-                // General acknowledgment
-                {"Okay", "Great! is there anything specific you'd like to learn about?" },
-                {"Ok","Awesome! what cybersecurity topic interests you?" },
-                {"Yes","Excellent! what would you like to know more about?" },
-                {"No","No worries! when never you're ready,  I'm here to help with cybersecurity awreness." },
-                {"thank you", "You're welcom! Stay safe online and remember, cyberesecurity is everyone's responsibility!" },
-                {"thanks", "You're Welcome! feel free to come back anytime if you have more cybersecurity question." },
+                // ----- Acknowledgements -----
+                { "okay", "Great! Is there anything specific you'd like to learn about?" },
+                { "ok", "Awesome! What cybersecurity topic interests you?" },
+                { "yes", "Excellent! What would you like to know more about?" },
+                { "no", "No worries! Whenever you're ready, I'm here to help with cybersecurity awareness." },
+                { "thank you", "You're welcome! Stay safe online and remember, cybersecurity is everyone's responsibility! 🛡️" },
+                { "thanks", "You're welcome! Feel free to come back anytime if you have more cybersecurity questions." },
+                { "help", "I'm here to help! You can ask me about passwords, phishing, safe browsing, social engineering, or two-factor authentication. What would you like to learn about?" }
             };
         }
 
         public string GetResponse(string input, string userName)
         {
-            foreach(var pair in responses)
+            // 1. First, check if the input contains any of the dictionary keys
+            foreach (var pair in responses)
             {
                 if (input.Contains(pair.Key.ToLower()))
                 {
-                    return pair.Value;  
+                    return pair.Value;
                 }
             }
 
+            // 2. If not found, try specific pattern checks (for safety)
             if (input.Contains("how") && input.Contains("you"))
-            {
                 return "I'm doing great! Always ready to help you stay secure online!";
-            }
-            if(input.Contains("password") && input.Contains("safe"))
-            {
+
+            if (input.Contains("password") && input.Contains("safe"))
                 return responses["password safety"];
-            }
+
             if (input.Contains("phish") || input.Contains("scam"))
-            {
                 return responses["phishing"];
-            }
-            if(input.Contains("brows") || input.Contains("web") || input.Contains("internet"))
-            {
+
+            if (input.Contains("brows") || input.Contains("web") || input.Contains("internet"))
                 return responses["safe browsing"];
-            }
+
             if (input.Contains("social") && input.Contains("engineer"))
-            {
                 return responses["social engineering"];
-            }
-            if (input.Contains("2fa") || input.Contains("tow factor"))
-            {
+
+            if (input.Contains("2fa") || input.Contains("two factor") || input.Contains("2 factor"))
                 return responses["2fa"];
-            }
 
-            foreach (var key in responses.Keys)
-            {
-                if (input.Contains(key))
-                {
-                    return responses[key];
-                }
-            }
-
+            // 3. No match – return null to trigger default response
             return null;
         }
-         
-
-
-
     }
 }
