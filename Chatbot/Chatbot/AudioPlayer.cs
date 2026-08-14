@@ -13,41 +13,36 @@ namespace CybersecurityChatbot
             string[] possiblePaths =
             {
                 "greeting.wav",
-
                 Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "greeting.wav"),
                 Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "greeting.wav"),
                 Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "greeting.wav")
             };
+
             audioFilePath = "greeting.wav";
 
-            foreach(string path in possiblePaths)
+            foreach (string path in possiblePaths)
             {
-
-            
                 if (File.Exists(path))
-            {
-
-            
-                audioFilePath = path;
-                break;
+                {
+                    audioFilePath = path;
+                    break;
+                }
+            }
         }
-    }
-}
+
         public void PlayGreeting()
         {
-         try
+            try
             {
                 if (!File.Exists(audioFilePath))
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("Voice greeting file not found. Continuing with text only...");
-
                     Console.ResetColor();
-
                     return;
                 }
-#pragma warning disable CA1416
 
+#pragma warning disable CA1416
                 using (SoundPlayer player = new SoundPlayer(audioFilePath))
                 {
                     player.Play();
@@ -57,21 +52,16 @@ namespace CybersecurityChatbot
                 }
 #pragma warning restore CA1416
             }
-            
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine($"Could not play audio : {ex.Message}");
+                Console.WriteLine($"Could not play audio: {ex.Message}");
                 Console.ResetColor();
             }
         }
+    }
+}
 
-            
 
-            }
-        }
 
-        
-
-    
 
