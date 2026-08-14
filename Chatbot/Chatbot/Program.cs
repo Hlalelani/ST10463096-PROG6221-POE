@@ -12,7 +12,7 @@ namespace CybersecurityChatbot
 
             Chatbot chatbot = new Chatbot();
 
-            chatbot.Start();
+            chatbot.start();
 
             Console.WriteLine("\n\nPress any Key to exit...");
             Console.ReadKey();
