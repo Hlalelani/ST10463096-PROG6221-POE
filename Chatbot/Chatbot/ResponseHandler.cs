@@ -113,7 +113,7 @@ namespace CybersecurityChatbot
 
             if (input.Contains("how") && input.Contains("you"))
             {
-                return responses.ContainsKey("how are you") ? responses["how are you"] : null;
+                return "I'm doing great! Always ready to help you stay secure online!";
             }
             if(input.Contains("password") && input.Contains("safe"))
             {
