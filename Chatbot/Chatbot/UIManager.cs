@@ -54,9 +54,9 @@ namespace CybersecurityChatbot
         public void DisplayWelcomeMessage(string userName)
         {
             Console.WriteLine();
-            DisplayColoredText($"Hello{userName}!", ConsoleColor.Green);
-            DisplayChatbotMessage($"It's great to have you here,{userName}!");
-            DisplayChatbotMessage("I'ii teach you how to protect yourself from cybe threats.");
+            DisplayColoredText($"Hello {userName}!", ConsoleColor.Green);
+            DisplayChatbotMessage($"It's great to have you here, {userName}!");
+            DisplayChatbotMessage("I'll teach you how to protect yourself from cybe threats.");
 
             DisplaySeparator();
         }
