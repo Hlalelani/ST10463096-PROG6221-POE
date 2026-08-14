@@ -124,7 +124,7 @@ namespace CybersecurityChatbot
 
             string response = responseHandler.GetResponse(lowerInput, userName);
 
-            if ( (response != null)
+            if ( response != null)
                 {
                 uiManager.DisplayChatbotMessage(response);
             }
