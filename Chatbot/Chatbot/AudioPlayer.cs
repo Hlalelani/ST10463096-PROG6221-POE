@@ -10,48 +10,31 @@ namespace CybersecurityChatbot
 
         public AudioPlayer()
         {
-            audioFilePath = FindAudioFile();
+            audioFilePath = "greeting.wav";
         }
-        private string FindAudioFile()
-        {
-         string[] possiblePaths =
-                { Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "greeting.wav"), 
-                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, " ..", "..", "..", "greeting.wav"),
-                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "greeting.wav"), "greeting.wav" };
-
-            foreach (string Path in possiblePaths)
-            {
-                if (File.Exists(Path))
-                {
-                    return Path;
-                }
-            }
-            return "greeting.wav ";
-        }
-
         public void PlayGreeting()
         {
-            try
+         try
             {
                 if (!File.Exists(audioFilePath))
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("Audio file not found. voice greeting skipped.");
+                    Console.WriteLine("Audio file not found. Voice greeting skipped.");
 
                     Console.ResetColor();
 
                     return;
                 }
 
-                using (SoundPlayer player =new SoundPlayer(audioFilePath))
+                using (SoundPlayer player = new SoundPlayer(audioFilePath))
                 {
                     player.Play();
-
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Playing voice greeting...");
                     Console.ResetColor();
                 }
             }
+            
             catch(Exception ex)
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
@@ -60,25 +43,12 @@ namespace CybersecurityChatbot
             }
         }
 
-        public void PlaySound(string filePath)
-        {
-            try
-            {
-                if(File.Exists(filePath))
-                {
-                    using (SoundPlayer player = new SoundPlayer(filePath))
-                    {
-                        player.Play();
-                    }
-                }
-            }
-            catch(Exception )
-            {
+            
 
             }
         }
 
         
 
-    }
-}
+    
+
