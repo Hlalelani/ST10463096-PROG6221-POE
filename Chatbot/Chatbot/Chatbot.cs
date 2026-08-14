@@ -22,7 +22,7 @@ namespace CybersecurityChatbot
             userName = "";
         }
 
-        public void start()
+        public void Start()
         {
             try
             {
