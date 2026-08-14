@@ -10,8 +10,29 @@ namespace CybersecurityChatbot
 
         public AudioPlayer()
         {
+            string[] possiblePaths =
+            {
+                "greeting.wav",
+
+                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "greeting.wav"),
+                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "greeting.wav"),
+                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "greeting.wav")
+            };
             audioFilePath = "greeting.wav";
+
+            foreach(string path in possiblePaths)
+            {
+
+            
+                if (File.Exists(path))
+            {
+
+            
+                audioFilePath = path;
+                break;
         }
+    }
+}
         public void PlayGreeting()
         {
          try
@@ -19,12 +40,13 @@ namespace CybersecurityChatbot
                 if (!File.Exists(audioFilePath))
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("Audio file not found. Voice greeting skipped.");
+                    Console.WriteLine("Voice greeting file not found. Continuing with text only...");
 
                     Console.ResetColor();
 
                     return;
                 }
+#pragma warning disable CA1416
 
                 using (SoundPlayer player = new SoundPlayer(audioFilePath))
                 {
@@ -33,6 +55,7 @@ namespace CybersecurityChatbot
                     Console.WriteLine("Playing voice greeting...");
                     Console.ResetColor();
                 }
+#pragma warning restore CA1416
             }
             
             catch(Exception ex)
