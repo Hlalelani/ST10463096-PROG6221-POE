@@ -39,3 +39,6 @@ the application features a voice greeting, colorful ASCII art and structured con
 
 ## Setup and Installation
 - clone the repository
+- Ensure .NET 9 SDK is installed
+- Restore dependencies
+- place voice greeting file
