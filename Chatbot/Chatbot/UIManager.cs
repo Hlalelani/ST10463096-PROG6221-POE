@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 
 namespace CybersecurityChatbot
@@ -9,94 +6,43 @@ namespace CybersecurityChatbot
     public class UIManager
     {
         private const string BORDER = "═══════════════════════════════════════════════════════════════════════════════════════════════";
-
         private const string DIVIDER = "───────────────────────────────────────────────────────────────────────────────────────────";
+        private const string THIN_DIVIDER = "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄";
 
         public void DisplayHeader()
         {
             Console.Clear();
-
-            DisplayAsciiArt();
-             
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("╔═══════════════════════════════════════════════════════════════════════════════════╗");
-            Console.WriteLine("║                          CYBERSECURITY AWARENESS BOT                              ║");
-            Console.WriteLine("║                              Your Digital Guardian                                ║");
-            Console.WriteLine("╚═══════════════════════════════════════════════════════════════════════════════════╝");
-
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine(@"   ██████╗██╗   ██╗██████╗ ███████╗██████╗ ███████╗ ██████╗██╗   ██╗██████╗ ██╗████████╗██╗   ██╗");
+            Console.WriteLine(@"  ██╔════╝╚██╗ ██╔╝██╔══██╗██╔════╝██╔══██╗██╔════╝██╔════╝╚██╗ ██╔╝██╔══██╗██║╚══██╔══╝╚██╗ ██╔╝");
+            Console.WriteLine(@"  ██║      ╚████╔╝ ██████╔╝█████╗  ██████╔╝███████╗██║      ╚████╔╝ ██████╔╝██║   ██║    ╚████╔╝ ");
+            Console.WriteLine(@"  ██║       ╚██╔╝  ██╔══██╗██╔══╝  ██╔══██╗╚════██║██║       ╚██╔╝  ██╔══██╗██║   ██║     ╚██╔╝  ");
+            Console.WriteLine(@"  ╚██████╗   ██║   ██████╔╝███████╗██║  ██║███████║╚██████╗   ██║   ██████╔╝██║   ██║      ██║   ");
+            Console.WriteLine(@"   ╚═════╝   ╚═╝   ╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝ ╚═════╝   ╚═╝   ╚═════╝ ╚═╝   ╚═╝      ╚═╝   ");
             Console.ResetColor();
 
-            TypeText("Welcome to the Cybersecurity Awareness Bot!", ConsoleColor.Cyan);
-            TypeText("I'M here to help you stay in the digital world.", ConsoleColor.Green);
-            Thread.Sleep(500);
-        }
-
-        private void DisplayAsciiArt()
-        {
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine(@"    _____             __ _               _                    _   _           ");
-            Console.WriteLine(@"   / ____|           / _| |             | |                  | \ | |          ");
-            Console.WriteLine(@"  | |     ___  _ __ | |_| |__   ___  ___| | _____  _ __   __|  \| | __ _ _ __ ");
-            Console.WriteLine(@"  | |    / _ \| '_ \|  _| '_ \ / _ \/ __| |/ _ \ \/ '_ \ / _` |\  |/ _` | '__|");
-            Console.WriteLine(@"  | |___| (_) | | | | | | |_) |  __/ (__| |  __/>  <| |_) | (_| | | | (_| | | ");
-            Console.WriteLine(@"   \_____\___/|_| |_|_| |_.__/ \___|\___|_|\___/_/\_\ .__/ \__,_|_|_|\__,_|_| ");
-            Console.WriteLine(@"                                                   | |                        ");
-            Console.WriteLine(@"                                                   |_|                        ");
-
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine(@"  ╔══════════════════════════════════════════════════════════════════════════════════════╗");
+            Console.WriteLine(@"  ║                         CYBERSECURITY AWARENESS ASSISTANT                         ║");
+            Console.WriteLine(@"  ║                      Your Digital Guardian Against Cyber Threats                    ║");
+            Console.WriteLine(@"  ╚══════════════════════════════════════════════════════════════════════════════════════╝");
             Console.ResetColor();
 
-            Console.ForegroundColor = ConsoleColor.DarkGray;
-
-            Console.WriteLine("═════════════════════════════════════════════════════════════════════════════════");
-            Console.ResetColor();
-        }
-
-        public void DisplayWelcomeMessage(string userName)
-        {
-            Console.WriteLine();
-            DisplayColoredText($"Hello {userName}!", ConsoleColor.Green);
-            DisplayChatbotMessage($"It's great to have you here, {userName}!");
-            DisplayChatbotMessage("I'll teach you how to protect yourself from cybe threats.");
-
-            DisplaySeparator();
-        }
-        public void DisplayChatbotMessage(string message)
-        {
-            DisplayColoredText($"Bot:{message}", ConsoleColor.Magenta);
-        }
-        public void DisplayColoredText(string text, ConsoleColor color)
-        {
-            Console.ForegroundColor = color;
-            Console.WriteLine(text);
-            Console.ResetColor();
-        }
-        public void DisplayError(string errorMessage)
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($" {errorMessage}");
-            Console.ResetColor();
-        }
-        public void DisplayDefaultResponse()
-        {
-            DisplayColoredText(" I didn't quite understand that. Could you rephrase?", ConsoleColor.Yellow);
-            DisplayChatbotMessage("Try asking about passwords, phishing, or safe browsing!");
-        }
-        public void DisplaySeparator()
-        {
-            Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine(DIVIDER);
-            Console.ResetColor();
-        }
-        public void DisplayBorder()
-        {
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine(BORDER);
             Console.ResetColor();
+            Console.WriteLine();
+
+            // Animated typing effect for welcome
+            TypeTextAnimated(" Welcome to your Cybersecurity Awareness Assistant!", ConsoleColor.Green, 25);
+            TypeTextAnimated(" I'm here to protect and educate you in the digital world.", ConsoleColor.Cyan, 25);
+            Console.WriteLine();
+            Thread.Sleep(500);
         }
-        public void TypeText(string text, ConsoleColor color, int delay = 30)
+
+        private void TypeTextAnimated(string text, ConsoleColor color, int delay = 30)
         {
             Console.ForegroundColor = color;
-
             foreach (char c in text)
             {
                 Console.Write(c);
@@ -105,6 +51,133 @@ namespace CybersecurityChatbot
             Console.WriteLine();
             Console.ResetColor();
         }
+
+        public void DisplayWelcomeMessage(string userName)
+        {
+            Console.WriteLine();
+            DisplayColoredText($"╔══════════════════════════════════════════════════════════════════════════════════════╗", ConsoleColor.DarkGray);
+            DisplayColoredText($"║   WELCOME, {userName.ToUpper()}!                                                      ║", ConsoleColor.Green);
+            DisplayColoredText($"║   Let's build your cyber defense skills together!                                  ║", ConsoleColor.Cyan);
+            DisplayColoredText($"╚══════════════════════════════════════════════════════════════════════════════════════╝", ConsoleColor.DarkGray);
+            Console.WriteLine();
+            DisplayColoredText($" Type 'help' anytime to see what I can teach you.", ConsoleColor.Yellow);
+            DisplayColoredText($" Type 'exit' to end our conversation.", ConsoleColor.Yellow);
+            DisplaySeparator();
+        }
+
+        public void DisplayChatbotMessage(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write(" ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("Assistant: ");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+
+            // Word wrap for long messages
+            string[] words = message.Split(' ');
+            string line = "";
+            int consoleWidth = Console.WindowWidth - 15;
+
+            foreach (string word in words)
+            {
+                if ((line + word).Length > consoleWidth)
+                {
+                    Console.WriteLine(line);
+                    Console.Write(new string(' ', 12)); 
+                    line = word + " ";
+                }
+                else
+                {
+                    line += word + " ";
+                }
+            }
+            if (!string.IsNullOrEmpty(line))
+            {
+                Console.WriteLine(line);
+            }
+            Console.ResetColor();
+        }
+
+        public void DisplayUserMessage(string userName, string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write($" {userName}: ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(message);
+            Console.ResetColor();
+        }
+
+        public void DisplayColoredText(string text, ConsoleColor color)
+        {
+            Console.ForegroundColor = color;
+            Console.WriteLine(text);
+            Console.ResetColor();
+        }
+
+        public void DisplayError(string errorMessage)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($" {errorMessage}");
+            Console.ResetColor();
+        }
+
+        public void DisplayDefaultResponse()
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(" I didn't quite understand that. Could you rephrase?");
+            Console.ResetColor();
+            DisplayChatbotMessage("Try asking about passwords, phishing, safe browsing, social engineering, or 2FA!");
+        }
+
+        public void DisplaySeparator()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine(THIN_DIVIDER);
+            Console.ResetColor();
+        }
+
+        public void DisplayBorder()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine(BORDER);
+            Console.ResetColor();
+        }
+
+        public void DisplayHelpHeader()
+        {
+            DisplaySeparator();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("╔══════════════════════════════════════════════════════════════════════════════════════╗");
+            Console.WriteLine("║   AVAILABLE TOPICS - TYPE ANY KEYWORD TO LEARN                                       ║");
+            Console.WriteLine("╚══════════════════════════════════════════════════════════════════════════════════════╝");
+            Console.ResetColor();
+        }
+
+        public void DisplayCategoryHeader(string category, ConsoleColor color)
+        {
+            Console.ForegroundColor = color;
+            Console.WriteLine($"\n  {category}");
+            Console.ResetColor();
+        }
+
+        public void DisplayTopicItem(string topic)
+        {
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine($"    {topic}");
+            Console.ResetColor();
+        }
+
+        public void DisplayLoadingAnimation(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write(message);
+            for (int i = 0; i < 3; i++)
+            {
+                Console.Write(".");
+                Thread.Sleep(300);
+            }
+            Console.WriteLine();
+            Console.ResetColor();
+        }
     }
 }
-
