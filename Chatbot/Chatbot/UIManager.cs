@@ -56,8 +56,8 @@ namespace CybersecurityChatbot
         {
             Console.WriteLine();
             DisplayColoredText($"╔══════════════════════════════════════════════════════════════════════════════════════╗", ConsoleColor.DarkGray);
-            DisplayColoredText($"║   WELCOME, {userName.ToUpper()}!                                                      ║", ConsoleColor.Green);
-            DisplayColoredText($"║   Let's build your cyber defense skills together!                                  ║", ConsoleColor.Cyan);
+            DisplayColoredText($"║   WELCOME, {userName.ToUpper()}!                                                     ║", ConsoleColor.Green);
+            DisplayColoredText($"║   Let's build your cyber defense skills together!                                    ║", ConsoleColor.Cyan);
             DisplayColoredText($"╚══════════════════════════════════════════════════════════════════════════════════════╝", ConsoleColor.DarkGray);
             Console.WriteLine();
             DisplayColoredText($" Type 'help' anytime to see what I can teach you.", ConsoleColor.Yellow);
