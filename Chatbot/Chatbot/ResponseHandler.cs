@@ -27,16 +27,16 @@ namespace CybersecurityChatbot
                 { "what can i ask you about", "You can ask about:\n• Password safety, 2FA\n• Phishing, scams, suspicious links\n• Safe browsing, VPN, public Wi-Fi\n• Malware, ransomware, antivirus\n• Social media privacy, identity theft\n• Software updates, backups\n• Mobile security, IoT, encryption\n• Quishing, Vishing, Smishing\n• AI scams, Deepfakes, SIM swap\nJust type a keyword!" },
 
                 // ----- PASSWORDS & AUTHENTICATION -----
-                { "password", " A strong password should be at least 12 characters long and include uppercase, lowercase, numbers, and special symbols. Never reuse passwords across different websites! Consider using a password manager." },
-                { "password tips", " Password tips:\n• Use unique passwords for every account\n• Make them at least 12 characters\n• Include uppercase, lowercase, numbers, symbols\n• Avoid common words or personal info\n• Use a password manager (e.g., Bitwarden, LastPass)\n• Enable two-factor authentication (2FA) whenever possible" },
+                { "password", "A strong password should be at least 12 characters long and include uppercase, lowercase, numbers, and special symbols. Never reuse passwords across different websites! Consider using a password manager." },
+                { "password tips", "Password tips:\n• Use unique passwords for every account\n• Make them at least 12 characters\n• Include uppercase, lowercase, numbers, symbols\n• Avoid common words or personal info\n• Use a password manager (e.g., Bitwarden, LastPass)\n• Enable two-factor authentication (2FA) whenever possible" },
                 { "password manager", "Password managers generate, store, and autofill strong passwords for you. Popular ones: Bitwarden (free & open‑source), 1Password, LastPass, and Dashlane. They encrypt your vault with a master password – make that one strong and memorable!" },
-                { "password safety", " Password safety is crucial! Use a mix of characters, avoid personal info, change them regularly, and never share them. Multi‑factor authentication adds an extra layer of security." },
-                { "password spraying", " Password spraying is a brute‑force attack where hackers try common passwords (like '123456') across many accounts. Use strong, unique passwords and enable 2FA to stop this." },
-                { "credential stuffing", " Attackers use stolen credentials from one breach to try them on other sites. Never reuse passwords – use a password manager to generate unique ones for every account." },
-                { "brute force", " Brute force attacks try millions of password combinations. Protect against them by using long, complex passwords and rate‑limiting / account lockout mechanisms on your accounts." },
+                { "password safety", "Password safety is crucial! Use a mix of characters, avoid personal info, change them regularly, and never share them. Multi‑factor authentication adds an extra layer of security." },
+                { "password spraying", "Password spraying is a brute‑force attack where hackers try common passwords (like '123456') across many accounts. Use strong, unique passwords and enable 2FA to stop this." },
+                { "credential stuffing", "Attackers use stolen credentials from one breach to try them on other sites. Never reuse passwords – use a password manager to generate unique ones for every account." },
+                { "brute force", "Brute force attacks try millions of password combinations. Protect against them by using long, complex passwords and rate‑limiting / account lockout mechanisms on your accounts." },
 
                 // ----- TWO-FACTOR & MFA -----
-                { "two factor authentication", " Two-factor authentication (2FA) adds a second verification step – something you have (phone) or are (fingerprint). Even if someone steals your password, they can't get in without the second factor. Use authenticator apps (Google Authenticator, Authy) instead of SMS for better security." },
+                { "two factor authentication", "Two-factor authentication (2FA) adds a second verification step – something you have (phone) or are (fingerprint). Even if someone steals your password, they can't get in without the second factor. Use authenticator apps (Google Authenticator, Authy) instead of SMS for better security." },
                 { "2fa", "2FA is one of the best ways to protect accounts. Always enable it on email, banking, and social media. App‑based tokens are more secure than SMS. Remember to save backup codes in a safe place!" },
                 { "multi factor authentication", "MFA uses multiple methods: something you know (password), something you have (phone), something you are (biometrics). The more layers, the harder it is for attackers to breach your accounts." },
 
@@ -58,7 +58,7 @@ namespace CybersecurityChatbot
                 { "safe browsing", " Tips for safe browsing:\n• Use a reputable browser with built‑in security\n• Clear your cache and cookies regularly\n• Be cautious on public Wi‑Fi – use a VPN\n• Enable 'Do Not Track' and anti‑tracking features\n• Avoid downloading files from untrusted sites." },
                 { "browser safety", " Keep your browser updated – updates patch security flaws. Use security extensions like HTTPS Everywhere to enforce encrypted connections. Disable third‑party cookies and consider using a sandbox or a separate profile for sensitive activities." },
                 { "digital footprint", " Your digital footprint is the trail of data you leave online – posts, photos, comments, even what others post about you. Regularly review your privacy settings, Google your name, and remove outdated or sensitive info." },
-                { "safe download", " Only download files from official websites or app stores. Avoid cracked software or pirated media – they often contain malware. Scan downloads with antivirus before opening." },
+                { "safe download", "⬇ Only download files from official websites or app stores. Avoid cracked software or pirated media – they often contain malware. Scan downloads with antivirus before opening." },
 
                 // ----- SOCIAL MEDIA & IDENTITY -----
                 { "social media privacy", " Protect your privacy on social media:\n• Set profiles to private\n• Avoid sharing your location, phone number, or ID documents publicly\n• Be cautious of quizzes and posts that ask for personal information (they may be used for security questions)\n• Review your friends/followers list regularly\n• Use strong, unique passwords for each social platform." },
@@ -79,7 +79,7 @@ namespace CybersecurityChatbot
                 { "worm", "A worm is a self‑replicating malware that spreads across networks without user action. Keep your firewall enabled, update your system, and use strong passwords to prevent network‑based attacks." },
                 { "zero day", " A zero‑day vulnerability is a software flaw unknown to the vendor – hackers exploit it before a patch exists. Protect yourself by keeping software updated, using a firewall, and limiting your exposure (e.g., disabling unnecessary services)." },
                 { "supply chain attack", " Attackers compromise a trusted third‑party (like a software provider) to distribute malware to many victims. Regularly check for vendor security advisories and keep all software patched. Use only reputable vendors." },
-                { "deepfake", "Deepfakes use AI to create realistic fake audio or video – used in scams to impersonate executives or loved ones. Always verify through a second channel (e.g., a phone call to a known number) before acting on unusual requests." },
+                { "deepfake", " Deepfakes use AI to create realistic fake audio or video – used in scams to impersonate executives or loved ones. Always verify through a second channel (e.g., a phone call to a known number) before acting on unusual requests." },
                 { "ai scam", " AI scams include automated phishing calls, chatbots impersonating customer support, and fake investment schemes. Be sceptical of unsolicited offers and always verify identities through official websites." },
 
                 // ----- PROTECTION TOOLS -----
@@ -90,7 +90,7 @@ namespace CybersecurityChatbot
 
                 // ----- NETWORK & WI-FI -----
                 { "public wi fi", " Public Wi‑Fi (in cafes, airports, etc.) is insecure – attackers can intercept your data. Protect yourself by:\n• Using a VPN\n• Avoiding sensitive transactions (banking, shopping) on public networks\n• Turning off file sharing\n• Using HTTPS websites\n• Forgetting the network after use." },
-                { "secure wi fi", "Secure your home Wi‑Fi by:\n• Changing the default router password\n• Using WPA3 or WPA2 encryption\n• Hiding your SSID (network name)\n• Keeping your router's firmware updated\n• Disabling WPS (Wi‑Fi Protected Setup) to prevent brute‑force attacks." },
+                { "secure wi fi", " Secure your home Wi‑Fi by:\n• Changing the default router password\n• Using WPA3 or WPA2 encryption\n• Hiding your SSID (network name)\n• Keeping your router's firmware updated\n• Disabling WPS (Wi‑Fi Protected Setup) to prevent brute‑force attacks." },
                 { "hotspot", " When using your phone as a hotspot, set a strong password and use WPA2 encryption. Only share it with trusted people, and turn it off when not needed to prevent unauthorised access." },
                 { "router security", "Your router is the gateway to your home network. Secure it by:\n• Changing the admin password\n• Updating firmware regularly\n• Disabling remote management\n• Using a guest network for visitors\n• Enabling logging to monitor unusual activity." },
 
@@ -137,32 +137,41 @@ namespace CybersecurityChatbot
 
         public string GetResponse(string input, string userName)
         {
+            // Clean the input
+            string cleanInput = input.ToLower().Trim();
+
+            // DIRECT MATCH - Check if the exact key exists
+            if (responses.ContainsKey(cleanInput))
+            {
+                return responses[cleanInput];
+            }
+
             // 1. Check if input contains any dictionary key (case‑insensitive)
             foreach (var pair in responses)
             {
-                if (input.Contains(pair.Key.ToLower()))
+                if (cleanInput.Contains(pair.Key.ToLower()))
                 {
                     return pair.Value;
                 }
             }
 
             // 2. Fallback patterns for combined queries
-            if (input.Contains("how") && input.Contains("you"))
+            if (cleanInput.Contains("how") && cleanInput.Contains("you"))
                 return "I'm doing great! Always ready to help you stay secure online!";
 
-            if (input.Contains("password") && input.Contains("safe"))
+            if (cleanInput.Contains("password") && cleanInput.Contains("safe"))
                 return responses["password safety"];
 
-            if (input.Contains("phish") || input.Contains("scam"))
+            if (cleanInput.Contains("phish") || cleanInput.Contains("scam"))
                 return responses["phishing"];
 
-            if (input.Contains("brows") || input.Contains("web") || input.Contains("internet"))
+            if (cleanInput.Contains("brows") || cleanInput.Contains("web") || cleanInput.Contains("internet"))
                 return responses["safe browsing"];
 
-            if (input.Contains("social") && input.Contains("engineer"))
+            if (cleanInput.Contains("social") && cleanInput.Contains("engineer"))
                 return responses["social engineering"];
 
-            if (input.Contains("2fa") || input.Contains("two factor") || input.Contains("2 factor"))
+            if (cleanInput.Contains("2fa") || cleanInput.Contains("two factor") || cleanInput.Contains("2 factor"))
                 return responses["2fa"];
 
             // 3. No match
