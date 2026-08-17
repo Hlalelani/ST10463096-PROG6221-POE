@@ -114,8 +114,8 @@ namespace CybersecurityChatbot
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("\n╔══════════════════════════════════════════════════════════════════════════════════════╗");
                 Console.WriteLine($"║  Goodbye {userName}! Stay safe online!                                                ║");
-                Console.WriteLine("  ║ Remember: Cybersecurity is everyone's responsibility!                                ║");
-                Console.WriteLine("  ╚══════════════════════════════════════════════════════════════════════════════════════╝");
+                Console.WriteLine("║   Remember: Cybersecurity is everyone's responsibility!                                ║");
+                Console.WriteLine("╚══════════════════════════════════════════════════════════════════════════════════════  ╝");
                 Console.ResetColor();
                 isRunning = false;
                 return;
@@ -149,14 +149,18 @@ namespace CybersecurityChatbot
             {
                 string[] parts = input.Split('.');
                 if (parts.Length == 2 &&
-                    int.TryParse(parts[0], out int mainCategory) &&
-                    int.TryParse(parts[1], out int subTopic))
+                    int.TryParse(parts[0].Trim(), out int mainCategory) &&
+                    int.TryParse(parts[1].Trim(), out int subTopic))
                 {
                     string keyword = GetKeywordFromNumber(mainCategory, subTopic);
+
                     if (keyword != null)
                     {
                         uiManager.DisplayLoadingAnimation(" Searching");
+
+                        // Get response from ResponseHandler
                         string response = responseHandler.GetResponse(keyword, userName);
+
                         if (response != null)
                         {
                             uiManager.DisplayChatbotMessage(response);
@@ -164,8 +168,13 @@ namespace CybersecurityChatbot
                         }
                         else
                         {
-                            uiManager.DisplayError("Topic not found. Please try again.");
+                            uiManager.DisplayError($"Topic '{keyword}' not found. Please try again.");
                         }
+                        return;
+                    }
+                    else
+                    {
+                        uiManager.DisplayError($"Topic '{input}' not found. Please check the number and try again.");
                         return;
                     }
                 }
@@ -292,20 +301,24 @@ namespace CybersecurityChatbot
             };
 
             string key = $"{category}.{subTopic}";
-            return topicMap.ContainsKey(key) ? topicMap[key] : null;
+            if (topicMap.ContainsKey(key))
+            {
+                return topicMap[key];
+            }
+            return null;
         }
 
         private void DisplayMainMenu()
         {
             uiManager.DisplayHelpHeader();
 
-            uiManager.DisplayCategoryHeader(" 1. PASSWORDS & AUTHENTICATION", ConsoleColor.Green);
+            uiManager.DisplayCategoryHeader("1. PASSWORDS & AUTHENTICATION", ConsoleColor.Green);
             uiManager.DisplayTopicItem("  Type '1' to see all password topics");
 
             uiManager.DisplayCategoryHeader(" 2. PHISHING & SCAMS", ConsoleColor.Red);
             uiManager.DisplayTopicItem("  Type '2' to see all phishing topics");
 
-            uiManager.DisplayCategoryHeader(" 3. SAFE BROWSING & PRIVACY", ConsoleColor.Cyan);
+            uiManager.DisplayCategoryHeader("3. SAFE BROWSING & PRIVACY", ConsoleColor.Cyan);
             uiManager.DisplayTopicItem("  Type '3' to see all browsing topics");
 
             uiManager.DisplayCategoryHeader(" 4. MALWARE & THREATS", ConsoleColor.Red);
@@ -339,7 +352,7 @@ namespace CybersecurityChatbot
             uiManager.DisplayTopicItem("  Type '13' to see other commands");
 
             uiManager.DisplaySeparator();
-            uiManager.DisplayChatbotMessage(" Type a category number (e.g., '1') to see topics, or '1.1' for specific information!");
+            uiManager.DisplayChatbotMessage("Type a category number (e.g., '1') to see topics, or '1.1' for specific information!");
             uiManager.DisplayChatbotMessage(" You can also type keywords like 'password' or 'phishing'.");
             uiManager.DisplayColoredText(" Type 'exit' to leave | Type 'menu' for this menu again", ConsoleColor.DarkGray);
             uiManager.DisplaySeparator();
