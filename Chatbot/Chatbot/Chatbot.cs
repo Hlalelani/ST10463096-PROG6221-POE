@@ -124,22 +124,26 @@ namespace CybersecurityChatbot
             {
                 uiManager.DisplayDefaultResponse();
             }
-        }  // <-- FIXED: Added missing brace for ProcessUserInput()
+        }  
 
         private void DisplayHelp()
         {
             uiManager.DisplaySeparator();
-            uiManager.DisplayColoredText("📚 What can I help you with?", ConsoleColor.Cyan);
-            uiManager.DisplayColoredText("  • Password safety", ConsoleColor.White);
-            uiManager.DisplayColoredText("  • Phishing scams", ConsoleColor.White);
-            uiManager.DisplayColoredText("  • Safe browsing", ConsoleColor.White);
-            uiManager.DisplayColoredText("  • Social engineering", ConsoleColor.White);
-            uiManager.DisplayColoredText("  • Two-factor authentication", ConsoleColor.White);  // <-- FIXED: "Tow" -> "Two"
-            uiManager.DisplayColoredText("  • General cybersecurity tips", ConsoleColor.White);
-
+            uiManager.DisplayColoredText(" What can I help you with?", ConsoleColor.Cyan);
+            uiManager.DisplayColoredText("  • Password safety & 2FA", ConsoleColor.White);
+            uiManager.DisplayColoredText("  • Phishing, scams & suspicious links", ConsoleColor.White);
+            uiManager.DisplayColoredText("  • Quishing, Vishing, Smishing", ConsoleColor.White);
+            uiManager.DisplayColoredText("  • Safe browsing & VPN", ConsoleColor.White);
+            uiManager.DisplayColoredText("  • Malware, ransomware & antivirus", ConsoleColor.White);
+            uiManager.DisplayColoredText("  • Social media privacy & identity theft", ConsoleColor.White);
+            uiManager.DisplayColoredText("  • Software updates & backups", ConsoleColor.White);
+            uiManager.DisplayColoredText("  • Mobile & IoT security", ConsoleColor.White);
+            uiManager.DisplayColoredText("  • AI scams, Deepfakes, SIM swap", ConsoleColor.White);
+            uiManager.DisplayColoredText("  • Zero-day & Supply chain attacks", ConsoleColor.White);
+            uiManager.DisplayColoredText("  • Digital footprint & OSINT", ConsoleColor.White);
+            uiManager.DisplayColoredText("  • Cloud security & safe downloads", ConsoleColor.White);
             uiManager.DisplayChatbotMessage("Just ask me about any of these topics!");
-            uiManager.DisplayColoredText("\nType 'exit' to leave or 'help' to see this menu again.", ConsoleColor.Gray);  // <-- FIXED: "tp" -> "to"
-
+            uiManager.DisplayColoredText("\nType 'exit' to leave or 'help' to see this menu again.", ConsoleColor.Gray);
             uiManager.DisplaySeparator();
         }
     }
