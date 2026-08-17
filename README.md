@@ -5,7 +5,18 @@ Cybersecurity chatbot part1, part2 and part 3
 
 # cybersecurity Awareness Chatbot
 
-A C# console chatbot designed to educate South African citizens about cybersecurity threats and safe online practices.
+a console-based virtual assistant that educates South African citizens about online threats, develop in C# for the programming 2A.
+
+## Project Description
+
+This chatbot is designed to raise cybersecurity awareness among South African citizens, who are increasingly targeted by phishing, malware and social engineering attacks. it simulates a friendly conversation, providing practical advice on:
+
+- Creating strong passwords
+- Recognizing phishing emails
+- safe browsing habits two-factor authentication
+- Social engineering tactics
+
+the application features a voice greeting, colorful ASCII art and structured console UI, IT is built with C# and .NET9, following object-oriented principles.
 
 ## features
 - voice greeting when the application starts
@@ -28,3 +39,6 @@ A C# console chatbot designed to educate South African citizens about cybersecur
 
 ## Setup and Installation
 - clone the repository
+- Ensure .NET 9 SDK is installed
+- Restore dependencies
+- place voice greeting file
