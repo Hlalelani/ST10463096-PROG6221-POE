@@ -37,7 +37,7 @@ namespace CybersecurityChatbot
                 if (!File.Exists(audioFilePath))
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine(" Voice greeting file not found. Continuing with text only...");
+                    Console.WriteLine("Voice greeting file not found. Continuing with text only...");
                     Console.ResetColor();
                     return;
                 }
@@ -47,7 +47,7 @@ namespace CybersecurityChatbot
                 {
                     player.Play();
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine(" Voice greeting is playing...");
+                    Console.WriteLine("Voice greeting is playing...");
                     Console.ResetColor();
                 }
 #pragma warning restore CA1416
@@ -55,7 +55,7 @@ namespace CybersecurityChatbot
             catch (Exception ex)
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine($" Could not play audio: {ex.Message}");
+                Console.WriteLine($"Could not play audio: {ex.Message}");
                 Console.ResetColor();
             }
         }
