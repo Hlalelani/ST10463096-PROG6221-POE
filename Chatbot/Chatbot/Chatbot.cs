@@ -11,16 +11,20 @@ namespace CybersecurityChatbot
         private UIManager uiManager;
         private ResponseHandler responseHandler;
         private AudioPlayer audioPlayer;
-        private bool showDetailedMenu;
+        private string lastTopic;
+        private List<string> conversationHistory;
+        private Random random;
 
         public Chatbot()
         {
             uiManager = new UIManager();
             responseHandler = new ResponseHandler();
             audioPlayer = new AudioPlayer();
+            random = new Random();
             isRunning = true;
             userName = "";
-            showDetailedMenu = true;
+            lastTopic = "";
+            conversationHistory = new List<string>();
         }
 
         public void Start()
@@ -81,47 +85,59 @@ namespace CybersecurityChatbot
 
         private void StartConversation()
         {
+            // Step 1: Greeting first
             uiManager.DisplaySeparator();
-            uiManager.DisplayChatbotMessage($"Hello {userName}! I'm your Cybersecurity Awareness Assistant.");
-            uiManager.DisplayChatbotMessage("I'm here to help you stay safe online.");
+            uiManager.DisplayGreeting(userName);
             uiManager.DisplaySeparator();
+
+            // Step 2: Ask how user is doing
+            AskHowUserIsDoing();
+
+            // Step 3: Then show the menu
             DisplayMainMenu();
 
             while (isRunning)
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.Write($"\n {userName}: ");
+                Console.Write($"\n{userName}: ");
                 Console.ResetColor();
 
                 string userInput = Console.ReadLine();
 
                 if (string.IsNullOrWhiteSpace(userInput))
                 {
-                    uiManager.DisplayError("I didn't catch that. Please type something.");
+                    uiManager.DisplayError("I didn't catch that.");
                     continue;
                 }
                 ProcessUserInput(userInput);
             }
         }
 
+        private void AskHowUserIsDoing()
+        {
+            string[] askResponses = {
+                $"How are you feeling today, {userName}?",
+                $"I hope you are having a great day, {userName}! How are you?",
+                $"Before we start, how are you doing today, {userName}?"
+            };
+            string response = askResponses[random.Next(askResponses.Length)];
+            uiManager.DisplayChatbotMessage(response);
+        }
+
         private void ProcessUserInput(string input)
         {
             string lowerInput = input.ToLower().Trim();
+            conversationHistory.Add(lowerInput);
 
             // Exit commands
-            if (lowerInput == "exit" || lowerInput == "quit" || lowerInput == "bye")
+            if (lowerInput == "exit" || lowerInput == "quit" || lowerInput == "bye" ||
+                lowerInput == "goodbye" || lowerInput == "see you" || lowerInput == "later")
             {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("\n╔══════════════════════════════════════════════════════════════════════════════════════╗");
-                Console.WriteLine($"║  Goodbye {userName}! Stay safe online!                                                ║");
-                Console.WriteLine("║   Remember: Cybersecurity is everyone's responsibility!                                ║");
-                Console.WriteLine("╚══════════════════════════════════════════════════════════════════════════════════════  ╝");
-                Console.ResetColor();
-                isRunning = false;
+                ShowExitMessage();
                 return;
             }
 
-            // Help commands
+            // Help / Menu commands
             if (lowerInput == "help" || lowerInput == "menu" || lowerInput == "options" || lowerInput == "?")
             {
                 DisplayMainMenu();
@@ -135,369 +151,383 @@ namespace CybersecurityChatbot
                 return;
             }
 
-            // --- NUMBERED NAVIGATION SYSTEM ---
-
-            // Check for category selection (1, 2, 3, etc.)
-            if (int.TryParse(input, out int categoryNumber) && categoryNumber >= 1 && categoryNumber <= 13)
+            // Follow-up questions
+            if (lowerInput == "tell me more" || lowerInput == "more" || lowerInput == "another tip" ||
+                lowerInput == "another" || lowerInput == "continue" || lowerInput == "go on" ||
+                lowerInput == "and then" || lowerInput == "what else" || lowerInput == "more info")
             {
-                DisplayCategoryDetails(categoryNumber);
+                HandleFollowUp();
                 return;
             }
 
-            // Check for sub-topic selection (1.1, 1.2, 2.1, etc.)
-            if (input.Contains("."))
+            // ====== NATURAL CONVERSATION RESPONSES ======
+
+            // 1. How are you responses (User asks bot)
+            if (lowerInput.Contains("how are you") || lowerInput.Contains("how do you do") ||
+                lowerInput.Contains("how you doing") || lowerInput.Contains("how is it going") ||
+                lowerInput.Contains("how's it going"))
             {
-                string[] parts = input.Split('.');
-                if (parts.Length == 2 &&
-                    int.TryParse(parts[0].Trim(), out int mainCategory) &&
-                    int.TryParse(parts[1].Trim(), out int subTopic))
-                {
-                    string keyword = GetKeywordFromNumber(mainCategory, subTopic);
-
-                    if (keyword != null)
-                    {
-                        uiManager.DisplayLoadingAnimation(" Searching");
-
-                        // Get response from ResponseHandler
-                        string response = responseHandler.GetResponse(keyword, userName);
-
-                        if (response != null)
-                        {
-                            uiManager.DisplayChatbotMessage(response);
-                            uiManager.DisplayChatbotMessage($" Type '{mainCategory}' to see more topics in this category, or 'menu' for main menu.");
-                        }
-                        else
-                        {
-                            uiManager.DisplayError($"Topic '{keyword}' not found. Please try again.");
-                        }
-                        return;
-                    }
-                    else
-                    {
-                        uiManager.DisplayError($"Topic '{input}' not found. Please check the number and try again.");
-                        return;
-                    }
-                }
+                HandleHowAreYou();
+                return;
             }
 
-            // Check for keyword search (existing functionality)
-            uiManager.DisplayLoadingAnimation(" Thinking");
-            string keywordResponse = responseHandler.GetResponse(lowerInput, userName);
-
-            if (keywordResponse != null)
+            // 2. User says they are feeling something
+            if (lowerInput.Contains("i am") || lowerInput.Contains("i'm") || lowerInput.Contains("feeling") ||
+                lowerInput.Contains("i feel"))
             {
-                uiManager.DisplayChatbotMessage(keywordResponse);
+                HandleUserMood(lowerInput);
+                return;
+            }
+
+            // 3. Positive responses: good, fine, great, well, okay
+            if (lowerInput == "good" || lowerInput == "fine" || lowerInput == "great" ||
+                lowerInput == "well" || lowerInput == "okay" || lowerInput == "ok" ||
+                lowerInput == "not bad" || lowerInput == "doing well" || lowerInput == "i am good" ||
+                lowerInput == "i am fine" || lowerInput == "im good" || lowerInput == "im fine" ||
+                lowerInput.Contains("am good") || lowerInput.Contains("am fine") ||
+                lowerInput.Contains("doing good") || lowerInput.Contains("doing fine"))
+            {
+                HandlePositiveResponse();
+                return;
+            }
+
+            // 4. Negative responses: bad, not good, tired, stressed
+            if (lowerInput.Contains("bad") || lowerInput.Contains("not good") ||
+                lowerInput.Contains("tired") || lowerInput.Contains("stressed") ||
+                lowerInput.Contains("worried") || lowerInput.Contains("scared") ||
+                lowerInput.Contains("anxious") || lowerInput.Contains("overwhelmed") ||
+                lowerInput.Contains("sad") || lowerInput.Contains("not great"))
+            {
+                HandleNegativeResponse();
+                return;
+            }
+
+            // 5. Thank you responses
+            if (lowerInput.Contains("thank") || lowerInput.Contains("thanks") || lowerInput == "ty")
+            {
+                HandleThankYou();
+                return;
+            }
+
+            // 6. Greetings
+            if (lowerInput == "hello" || lowerInput == "hi" || lowerInput == "hey" || lowerInput == "howdy")
+            {
+                HandleGreeting();
+                return;
+            }
+
+            // 7. What is your name
+            if (lowerInput.Contains("what is your name") || lowerInput.Contains("who are you"))
+            {
+                uiManager.DisplayChatbotMessage($"I am your Cybersecurity Awareness Assistant! You can call me CyberGuard.");
+                uiManager.DisplayChatbotMessage($"I am here to help you stay safe online, {userName}.");
+                return;
+            }
+
+            // 8. What can you do / capabilities
+            if (lowerInput.Contains("what can you do") || lowerInput.Contains("capabilities") ||
+                lowerInput.Contains("help me with") || lowerInput.Contains("what do you do"))
+            {
+                uiManager.DisplayChatbotMessage($"I can help you with cybersecurity topics like:");
+                uiManager.DisplayChatbotMessage("  - Creating strong passwords");
+                uiManager.DisplayChatbotMessage("  - Recognizing phishing scams");
+                uiManager.DisplayChatbotMessage("  - Protecting your privacy");
+                uiManager.DisplayChatbotMessage("  - Avoiding malware and viruses");
+                uiManager.DisplayChatbotMessage("  - Securing your devices");
+                uiManager.DisplayChatbotMessage($"Just ask me about any topic, {userName}!");
+                return;
+            }
+
+            // Check if input is a topic (keyword recognition)
+            string topicResponse = responseHandler.GetResponse(lowerInput, userName);
+
+            if (topicResponse != null)
+            {
+                lastTopic = lowerInput;
+                HandleTopicResponse(lowerInput, topicResponse);
+                return;
+            }
+
+            // Default response
+            HandleDefaultResponse();
+        }
+
+        // ====== HANDLER METHODS ======
+
+        private void ShowExitMessage()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\n================================================================================");
+            Console.WriteLine($"  Goodbye {userName}! Stay safe online!");
+            Console.WriteLine("  Remember: Cybersecurity is everyone's responsibility!");
+            Console.WriteLine("  Come back anytime you need security advice!");
+            Console.WriteLine("================================================================================");
+            Console.ResetColor();
+            isRunning = false;
+        }
+
+        private void HandleFollowUp()
+        {
+            if (!string.IsNullOrEmpty(lastTopic))
+            {
+                uiManager.DisplayLoadingAnimation("Let me find more information");
+                string response = responseHandler.GetResponse(lastTopic, userName);
+                if (response != null)
+                {
+                    uiManager.DisplayChatbotMessage($"Of course! Here is more about {lastTopic}:");
+                    uiManager.DisplayChatbotMessage(response);
+                    uiManager.DisplayChatbotMessage($"Would you like to know more about {lastTopic}?");
+                    return;
+                }
+            }
+            uiManager.DisplayChatbotMessage("I would love to tell you more. What topic are you interested in?");
+        }
+
+        private void HandleHowAreYou()
+        {
+            string[] responses = {
+                $"I am doing great, {userName}! Thanks for asking. How are you doing today?",
+                $"I am always ready to help you stay secure online! What about you, {userName}?",
+                $"I am functioning perfectly! I love helping people learn about cybersecurity. How are you feeling?",
+                $"I am wonderful, {userName}! It is a great day to learn about staying safe online. How are you?"
+            };
+            string response = responses[random.Next(responses.Length)];
+            uiManager.DisplayChatbotMessage(response);
+        }
+
+        private void HandleUserMood(string input)
+        {
+            if (input.Contains("happy") || input.Contains("good") || input.Contains("great") ||
+                input.Contains("fine") || input.Contains("wonderful"))
+            {
+                string[] responses = {
+                    $"That is wonderful to hear, {userName}! A positive attitude makes learning about security even better.",
+                    $"I am so glad you are feeling good, {userName}! Let us make your day even better with some cybersecurity tips.",
+                    $"Great mood, {userName}! That is the perfect mindset to learn about staying safe online."
+                };
+                string response = responses[random.Next(responses.Length)];
+                uiManager.DisplayChatbotMessage(response);
+                uiManager.DisplayChatbotMessage("What topic would you like to explore today?");
+            }
+            else if (input.Contains("worried") || input.Contains("scared") || input.Contains("anxious"))
+            {
+                string[] responses = {
+                    $"I understand you are feeling worried, {userName}. Cybersecurity can seem scary, but I am here to help!",
+                    $"It is completely normal to feel anxious about online threats. Let me help you feel more secure.",
+                    $"Do not worry, {userName}! I will guide you through everything step by step. You are not alone in this."
+                };
+                string response = responses[random.Next(responses.Length)];
+                uiManager.DisplayChatbotMessage(response);
+                uiManager.DisplayChatbotMessage("Let's start with something simple - what would you like to learn about?");
+            }
+            else if (input.Contains("tired") || input.Contains("stressed") || input.Contains("overwhelmed"))
+            {
+                string[] responses = {
+                    $"I hear you, {userName}. Cybersecurity can be overwhelming. Let us keep it simple and clear.",
+                    $"Take a deep breath, {userName}. I am here to make this easy for you.",
+                    $"I understand you are feeling tired or stressed. Let me explain things in a simple way, {userName}."
+                };
+                string response = responses[random.Next(responses.Length)];
+                uiManager.DisplayChatbotMessage(response);
+                uiManager.DisplayChatbotMessage("What would you like to learn about today?");
             }
             else
             {
-                uiManager.DisplayDefaultResponse();
-                uiManager.DisplayChatbotMessage(" Type 'menu' to see all available topics, or type a keyword like 'password'.");
+                string[] responses = {
+                    $"I appreciate you sharing that with me, {userName}. How can I help you today?",
+                    $"Thank you for telling me, {userName}. What cybersecurity topic interests you?",
+                    $"I am here to listen and help, {userName}. What would you like to learn about?"
+                };
+                string response = responses[random.Next(responses.Length)];
+                uiManager.DisplayChatbotMessage(response);
             }
         }
 
-        private string GetKeywordFromNumber(int category, int subTopic)
+        private void HandlePositiveResponse()
         {
-            // Map category and sub-topic numbers to keywords
-            var topicMap = new Dictionary<string, string>
-            {
-                // Category 1: Passwords
-                { "1.1", "password" },
-                { "1.2", "password tips" },
-                { "1.3", "password safety" },
-                { "1.4", "password manager" },
-                { "1.5", "password spraying" },
-                { "1.6", "credential stuffing" },
-                { "1.7", "brute force" },
-                { "1.8", "two factor authentication" },
-                { "1.9", "multi factor authentication" },
-
-                // Category 2: Phishing
-                { "2.1", "phishing" },
-                { "2.2", "phishing email" },
-                { "2.3", "phishing scam" },
-                { "2.4", "quishing" },
-                { "2.5", "vishing" },
-                { "2.6", "smishing" },
-                { "2.7", "business email compromise" },
-                { "2.8", "suspicious link" },
-                { "2.9", "link" },
-
-                // Category 3: Browsing
-                { "3.1", "browsing" },
-                { "3.2", "safe browsing" },
-                { "3.3", "browser safety" },
-                { "3.4", "digital footprint" },
-                { "3.5", "safe download" },
-
-                // Category 4: Malware
-                { "4.1", "malware" },
-                { "4.2", "ransomware" },
-                { "4.3", "virus" },
-                { "4.4", "trojan" },
-                { "4.5", "spyware" },
-                { "4.6", "adware" },
-                { "4.7", "worm" },
-                { "4.8", "ransomware as a service" },
-                { "4.9", "zero day" },
-                { "4.10", "supply chain attack" },
-                { "4.11", "deepfake" },
-                { "4.12", "ai scam" },
-
-                // Category 5: Protection
-                { "5.1", "antivirus" },
-                { "5.2", "firewall" },
-                { "5.3", "vpn" },
-                { "5.4", "ad blocker" },
-
-                // Category 6: Network
-                { "6.1", "public wi fi" },
-                { "6.2", "secure wi fi" },
-                { "6.3", "hotspot" },
-                { "6.4", "router security" },
-
-                // Category 7: Data
-                { "7.1", "data backup" },
-                { "7.2", "software updates" },
-
-                // Category 8: Mobile
-                { "8.1", "mobile security" },
-                { "8.2", "app permissions" },
-                { "8.3", "phone safety" },
-                { "8.4", "SIM swap" },
-
-                // Category 9: IoT
-                { "9.1", "iot security" },
-                { "9.2", "smart home" },
-                { "9.3", "encryption" },
-                { "9.4", "zero trust" },
-                { "9.5", "cloud security" },
-
-                // Category 10: Family
-                { "10.1", "children online safety" },
-                { "10.2", "elder fraud" },
-
-                // Category 11: Shopping
-                { "11.1", "online shopping safety" },
-                { "11.2", "email safety" },
-
-                // Category 12: General
-                { "12.1", "cybersecurity" },
-                { "12.2", "cybersecurity tips" },
-                { "12.3", "tips" },
-                { "12.4", "social media privacy" },
-                { "12.5", "identity theft" },
-                { "12.6", "oversharing" },
-                { "12.7", "OSINT" },
-                { "12.8", "doxing" },
-                { "12.9", "sextortion" },
-
-                // Category 13: Other
-                { "13.1", "hello" },
-                { "13.2", "how are you" },
-                { "13.3", "what is your purpose" },
-                { "13.4", "what can you do" },
-                { "13.5", "what can i ask you about" },
-                { "13.6", "thank you" }
+            string[] responses = {
+                $"That is great to hear, {userName}! I am glad you are doing well.",
+                $"Wonderful! A positive day makes learning about cybersecurity even better, {userName}.",
+                $"Excellent! Let us make today productive with some cybersecurity knowledge, {userName}."
             };
-
-            string key = $"{category}.{subTopic}";
-            if (topicMap.ContainsKey(key))
-            {
-                return topicMap[key];
-            }
-            return null;
+            string response = responses[random.Next(responses.Length)];
+            uiManager.DisplayChatbotMessage(response);
+            uiManager.DisplayChatbotMessage($"What would you like to learn about today, {userName}?");
         }
+
+        private void HandleNegativeResponse()
+        {
+            string[] responses = {
+                $"I am sorry to hear that, {userName}. I hope learning about cybersecurity helps you feel more secure.",
+                $"That is not great to hear, {userName}. I am here to help you stay safe online.",
+                $"I understand things can be tough sometimes, {userName}. I am here to support you."
+            };
+            string response = responses[random.Next(responses.Length)];
+            uiManager.DisplayChatbotMessage(response);
+            uiManager.DisplayChatbotMessage($"What cybersecurity topic would you like me to explain, {userName}?");
+        }
+
+        private void HandleThankYou()
+        {
+            string[] responses = {
+                $"You are welcome, {userName}! I am glad I could help.",
+                $"Happy to help, {userName}! Stay safe online!",
+                $"My pleasure, {userName}! Is there anything else you would like to know?",
+                $"You are welcome! Remember, I am always here to help you stay secure, {userName}."
+            };
+            string response = responses[random.Next(responses.Length)];
+            uiManager.DisplayChatbotMessage(response);
+        }
+
+        private void HandleGreeting()
+        {
+            string[] responses = {
+                $"Hello again, {userName}! How can I help you today?",
+                $"Hi there, {userName}! Ready to learn more about cybersecurity?",
+                $"Hey, {userName}! What would you like to know about today?",
+                $"Good to see you again, {userName}! How are you doing?"
+            };
+            string response = responses[random.Next(responses.Length)];
+            uiManager.DisplayChatbotMessage(response);
+        }
+
+        private void HandleTopicResponse(string topic, string response)
+        {
+            uiManager.DisplayLoadingAnimation($"Let me think about that");
+            uiManager.DisplayChatbotMessage($"Great question about {topic}, {userName}!");
+            uiManager.DisplayChatbotMessage(response);
+            uiManager.DisplayChatbotMessage($"Would you like me to share more about {topic}?");
+        }
+
+        private void HandleDefaultResponse()
+        {
+            string[] responses = {
+                $"That is an interesting question, {userName}. Let me think...",
+                $"I want to make sure I give you the best answer, {userName}.",
+                $"Could you tell me more about what you would like to know, {userName}?",
+                $"I am here to help with cybersecurity topics like passwords, phishing, and privacy.",
+                $"I am not sure I understand, {userName}. Could you rephrase that?",
+                $"Let me think about that for a moment, {userName}."
+            };
+            string response = responses[random.Next(responses.Length)];
+            uiManager.DisplayChatbotMessage(response);
+            uiManager.DisplayChatbotMessage("Feel free to ask about anything cybersecurity-related.");
+        }
+
+        // ====== DISPLAY METHODS ======
 
         private void DisplayMainMenu()
         {
-            uiManager.DisplayHelpHeader();
-
-            uiManager.DisplayCategoryHeader("1. PASSWORDS & AUTHENTICATION", ConsoleColor.Green);
-            uiManager.DisplayTopicItem("  Type '1' to see all password topics");
-
-            uiManager.DisplayCategoryHeader(" 2. PHISHING & SCAMS", ConsoleColor.Red);
-            uiManager.DisplayTopicItem("  Type '2' to see all phishing topics");
-
-            uiManager.DisplayCategoryHeader("3. SAFE BROWSING & PRIVACY", ConsoleColor.Cyan);
-            uiManager.DisplayTopicItem("  Type '3' to see all browsing topics");
-
-            uiManager.DisplayCategoryHeader(" 4. MALWARE & THREATS", ConsoleColor.Red);
-            uiManager.DisplayTopicItem("  Type '4' to see all malware topics");
-
-            uiManager.DisplayCategoryHeader(" 5. PROTECTION TOOLS", ConsoleColor.Blue);
-            uiManager.DisplayTopicItem("  Type '5' to see all protection tools");
-
-            uiManager.DisplayCategoryHeader(" 6. NETWORK & WI-FI", ConsoleColor.DarkYellow);
-            uiManager.DisplayTopicItem("  Type '6' to see all network topics");
-
-            uiManager.DisplayCategoryHeader(" 7. DATA PROTECTION & BACKUP", ConsoleColor.Magenta);
-            uiManager.DisplayTopicItem("  Type '7' to see data protection topics");
-
-            uiManager.DisplayCategoryHeader(" 8. MOBILE SECURITY", ConsoleColor.DarkGreen);
-            uiManager.DisplayTopicItem("  Type '8' to see all mobile security topics");
-
-            uiManager.DisplayCategoryHeader(" 9. IoT & SMART HOME", ConsoleColor.DarkCyan);
-            uiManager.DisplayTopicItem("  Type '9' to see IoT topics");
-
-            uiManager.DisplayCategoryHeader(" 10. ONLINE SAFETY FOR ALL", ConsoleColor.Yellow);
-            uiManager.DisplayTopicItem("  Type '10' to see online safety topics");
-
-            uiManager.DisplayCategoryHeader(" 11. SHOPPING & EMAIL", ConsoleColor.DarkMagenta);
-            uiManager.DisplayTopicItem("  Type '11' to see shopping topics");
-
-            uiManager.DisplayCategoryHeader(" 12. GENERAL TIPS", ConsoleColor.White);
-            uiManager.DisplayTopicItem("  Type '12' to see general tips");
-
-            uiManager.DisplayCategoryHeader(" 13. OTHER", ConsoleColor.Gray);
-            uiManager.DisplayTopicItem("  Type '13' to see other commands");
-
-            uiManager.DisplaySeparator();
-            uiManager.DisplayChatbotMessage("Type a category number (e.g., '1') to see topics, or '1.1' for specific information!");
-            uiManager.DisplayChatbotMessage(" You can also type keywords like 'password' or 'phishing'.");
-            uiManager.DisplayColoredText(" Type 'exit' to leave | Type 'menu' for this menu again", ConsoleColor.DarkGray);
-            uiManager.DisplaySeparator();
-        }
-
-        private void DisplayCategoryDetails(int categoryNumber)
-        {
             uiManager.DisplaySeparator();
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine($"╔══════════════════════════════════════════════════════════════════════════════════════╗");
-            Console.WriteLine($"║   TOPICS IN CATEGORY {categoryNumber}                                                ║");
-            Console.WriteLine($"╚══════════════════════════════════════════════════════════════════════════════════════╝");
+            Console.WriteLine("================================================================================");
+            Console.WriteLine("  WHAT I CAN HELP YOU WITH");
+            Console.WriteLine("  Ask me about any topic below");
+            Console.WriteLine("================================================================================");
             Console.ResetColor();
 
-            switch (categoryNumber)
-            {
-                case 1:
-                    uiManager.DisplayCategoryHeader(" PASSWORDS & AUTHENTICATION", ConsoleColor.Green);
-                    uiManager.DisplayTopicItem("  1.1  password");
-                    uiManager.DisplayTopicItem("  1.2  password tips");
-                    uiManager.DisplayTopicItem("  1.3  password safety");
-                    uiManager.DisplayTopicItem("  1.4  password manager");
-                    uiManager.DisplayTopicItem("  1.5  password spraying");
-                    uiManager.DisplayTopicItem("  1.6  credential stuffing");
-                    uiManager.DisplayTopicItem("  1.7  brute force");
-                    uiManager.DisplayTopicItem("  1.8  two factor authentication (2FA)");
-                    uiManager.DisplayTopicItem("  1.9  multi factor authentication (MFA)");
-                    break;
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\n  PASSWORDS AND AUTHENTICATION");
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("    - password");
+            Console.WriteLine("    - password tips");
+            Console.WriteLine("    - password safety");
+            Console.WriteLine("    - password manager");
+            Console.WriteLine("    - two factor authentication or 2FA");
+            Console.WriteLine("    - multi factor authentication");
 
-                case 2:
-                    uiManager.DisplayCategoryHeader(" PHISHING & SCAMS", ConsoleColor.Red);
-                    uiManager.DisplayTopicItem("  2.1  phishing");
-                    uiManager.DisplayTopicItem("  2.2  phishing email");
-                    uiManager.DisplayTopicItem("  2.3  phishing scam");
-                    uiManager.DisplayTopicItem("  2.4  quishing (QR code phishing)");
-                    uiManager.DisplayTopicItem("  2.5  vishing (voice phishing)");
-                    uiManager.DisplayTopicItem("  2.6  smishing (SMS phishing)");
-                    uiManager.DisplayTopicItem("  2.7  business email compromise");
-                    uiManager.DisplayTopicItem("  2.8  suspicious link");
-                    uiManager.DisplayTopicItem("  2.9  link safety");
-                    break;
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n  PHISHING AND SCAMS");
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("    - phishing");
+            Console.WriteLine("    - phishing email");
+            Console.WriteLine("    - phishing scam");
+            Console.WriteLine("    - suspicious link");
+            Console.WriteLine("    - vishing, smishing, quishing");
 
-                case 3:
-                    uiManager.DisplayCategoryHeader(" SAFE BROWSING & PRIVACY", ConsoleColor.Cyan);
-                    uiManager.DisplayTopicItem("  3.1  browsing");
-                    uiManager.DisplayTopicItem("  3.2  safe browsing");
-                    uiManager.DisplayTopicItem("  3.3  browser safety");
-                    uiManager.DisplayTopicItem("  3.4  digital footprint");
-                    uiManager.DisplayTopicItem("  3.5  safe download");
-                    break;
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("\n  SAFE BROWSING AND PRIVACY");
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("    - safe browsing");
+            Console.WriteLine("    - browser safety");
+            Console.WriteLine("    - digital footprint");
 
-                case 4:
-                    uiManager.DisplayCategoryHeader(" MALWARE & THREATS", ConsoleColor.Red);
-                    uiManager.DisplayTopicItem("  4.1  malware");
-                    uiManager.DisplayTopicItem("  4.2  ransomware");
-                    uiManager.DisplayTopicItem("  4.3  virus");
-                    uiManager.DisplayTopicItem("  4.4  trojan");
-                    uiManager.DisplayTopicItem("  4.5  spyware");
-                    uiManager.DisplayTopicItem("  4.6  adware");
-                    uiManager.DisplayTopicItem("  4.7  worm");
-                    uiManager.DisplayTopicItem("  4.8  ransomware as a service");
-                    uiManager.DisplayTopicItem("  4.9  zero day");
-                    uiManager.DisplayTopicItem("  4.10 supply chain attack");
-                    uiManager.DisplayTopicItem("  4.11 deepfake");
-                    uiManager.DisplayTopicItem("  4.12 ai scam");
-                    break;
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n  MALWARE AND THREATS");
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("    - malware");
+            Console.WriteLine("    - ransomware");
+            Console.WriteLine("    - virus");
+            Console.WriteLine("    - trojan");
+            Console.WriteLine("    - spyware");
+            Console.WriteLine("    - zero day");
+            Console.WriteLine("    - deepfake");
 
-                case 5:
-                    uiManager.DisplayCategoryHeader(" PROTECTION TOOLS", ConsoleColor.Blue);
-                    uiManager.DisplayTopicItem("  5.1  antivirus");
-                    uiManager.DisplayTopicItem("  5.2  firewall");
-                    uiManager.DisplayTopicItem("  5.3  VPN (Virtual Private Network)");
-                    uiManager.DisplayTopicItem("  5.4  ad blocker");
-                    break;
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("\n  PROTECTION TOOLS");
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("    - antivirus");
+            Console.WriteLine("    - firewall");
+            Console.WriteLine("    - VPN");
+            Console.WriteLine("    - ad blocker");
 
-                case 6:
-                    uiManager.DisplayCategoryHeader(" NETWORK & WI-FI", ConsoleColor.DarkYellow);
-                    uiManager.DisplayTopicItem("  6.1  public wi fi");
-                    uiManager.DisplayTopicItem("  6.2  secure wi fi");
-                    uiManager.DisplayTopicItem("  6.3  hotspot");
-                    uiManager.DisplayTopicItem("  6.4  router security");
-                    break;
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine("\n  MOBILE AND IOT SECURITY");
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("    - mobile security");
+            Console.WriteLine("    - SIM swap");
+            Console.WriteLine("    - IoT security");
+            Console.WriteLine("    - smart home");
 
-                case 7:
-                    uiManager.DisplayCategoryHeader(" DATA PROTECTION & BACKUP", ConsoleColor.Magenta);
-                    uiManager.DisplayTopicItem("  7.1  data backup");
-                    uiManager.DisplayTopicItem("  7.2  software updates");
-                    break;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\n  ONLINE SAFETY");
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("    - children online safety");
+            Console.WriteLine("    - elder fraud");
 
-                case 8:
-                    uiManager.DisplayCategoryHeader(" MOBILE SECURITY", ConsoleColor.DarkGreen);
-                    uiManager.DisplayTopicItem("  8.1  mobile security");
-                    uiManager.DisplayTopicItem("  8.2  app permissions");
-                    uiManager.DisplayTopicItem("  8.3  phone safety");
-                    uiManager.DisplayTopicItem("  8.4  SIM swap");
-                    break;
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("\n  DATA PROTECTION");
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("    - data backup");
+            Console.WriteLine("    - software updates");
 
-                case 9:
-                    uiManager.DisplayCategoryHeader(" IoT & SMART HOME", ConsoleColor.DarkCyan);
-                    uiManager.DisplayTopicItem("  9.1  iot security");
-                    uiManager.DisplayTopicItem("  9.2  smart home");
-                    uiManager.DisplayTopicItem("  9.3  encryption");
-                    uiManager.DisplayTopicItem("  9.4  zero trust");
-                    uiManager.DisplayTopicItem("  9.5  cloud security");
-                    break;
-
-                case 10:
-                    uiManager.DisplayCategoryHeader(" ONLINE SAFETY FOR ALL", ConsoleColor.Yellow);
-                    uiManager.DisplayTopicItem("  10.1 children online safety");
-                    uiManager.DisplayTopicItem("  10.2 elder fraud");
-                    break;
-
-                case 11:
-                    uiManager.DisplayCategoryHeader(" SHOPPING & EMAIL", ConsoleColor.DarkMagenta);
-                    uiManager.DisplayTopicItem("  11.1 online shopping safety");
-                    uiManager.DisplayTopicItem("  11.2 email safety");
-                    break;
-
-                case 12:
-                    uiManager.DisplayCategoryHeader(" GENERAL TIPS", ConsoleColor.White);
-                    uiManager.DisplayTopicItem("  12.1 cybersecurity");
-                    uiManager.DisplayTopicItem("  12.2 cybersecurity tips");
-                    uiManager.DisplayTopicItem("  12.3 tips (general)");
-                    uiManager.DisplayTopicItem("  12.4 social media privacy");
-                    uiManager.DisplayTopicItem("  12.5 identity theft");
-                    uiManager.DisplayTopicItem("  12.6 oversharing");
-                    uiManager.DisplayTopicItem("  12.7 OSINT");
-                    uiManager.DisplayTopicItem("  12.8 doxing");
-                    uiManager.DisplayTopicItem("  12.9 sextortion");
-                    break;
-
-                case 13:
-                    uiManager.DisplayCategoryHeader(" OTHER", ConsoleColor.Gray);
-                    uiManager.DisplayTopicItem("  13.1 hello / hi / hey");
-                    uiManager.DisplayTopicItem("  13.2 how are you");
-                    uiManager.DisplayTopicItem("  13.3 what is your purpose");
-                    uiManager.DisplayTopicItem("  13.4 what can you do");
-                    uiManager.DisplayTopicItem("  13.5 what can i ask you about");
-                    uiManager.DisplayTopicItem("  13.6 thank you / thanks");
-                    break;
-            }
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("\n  GENERAL TIPS");
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("    - cybersecurity");
+            Console.WriteLine("    - cybersecurity tips");
+            Console.WriteLine("    - social media privacy");
+            Console.WriteLine("    - identity theft");
 
             uiManager.DisplaySeparator();
-            uiManager.DisplayChatbotMessage($" Type a number like '{categoryNumber}.1' to learn about a specific topic!");
-            uiManager.DisplayChatbotMessage($" Type 'back' to return to the main menu, or 'menu' for all categories.");
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("  WHAT YOU CAN ASK:");
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("    - Ask: tell me more for follow-up information");
+            Console.WriteLine("    - Ask: how are you to check in with me");
+            Console.WriteLine("    - Ask: what can you do to see my capabilities");
+            Console.WriteLine("    - Tell me how you are feeling (good, worried, tired)");
+            Console.WriteLine("    - Say: thank you and I will respond warmly");
+            Console.ResetColor();
+
+            uiManager.DisplaySeparator();
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine($"  {userName}, what would you like to learn about today?");
+            Console.ResetColor();
+
+            uiManager.DisplayColoredText("  Say 'exit' when you are done.", ConsoleColor.DarkGray);
             uiManager.DisplaySeparator();
         }
     }
