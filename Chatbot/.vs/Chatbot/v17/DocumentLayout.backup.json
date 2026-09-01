@@ -55,7 +55,7 @@
               "RelativeDocumentMoniker": "Chatbot\\greeting.wav",
               "ToolTip": "C:\\Users\\Student\\Documents\\Visual Studio 2022\\ST10463096-PROG6221-POE\\Chatbot\\Chatbot\\greeting.wav",
               "RelativeToolTip": "Chatbot\\greeting.wav",
-              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHoSURBVDhPhZM/aBNxFMc/ucaGJrQSdUgQUwoOlWLUxQyazXZxc1BwcXFxUhSHDAqCkE26VRdRN3EUhExH1jiIWOuStBCphYjG47yjd7nf7zncn\u002BTaqg\u002BOe/zee5/3/X25yxCFaZoS538LEVG1Wu1BoVBoxgdJ0TRNCUYjCYKRKBWIUoForURrJUEwEq2VdDodabVaqr/99VY8Z8SJiCAIyBgcvw0jbPN9n3q9bnxZ31jt9Xo3UgCt9T8hAI7j0G630VpPd7vdFymAiIBICIny/tDj9utNNgcuAMvLlzhTrXJqcTGB7lNApEIEpqYyrHV9HnbH4FK5RGW\u002Bgtb6YMDkM5M1uF49yputn7z8/D1uTUUCUEoRChirGDgjpm2Lxwuae63tlDdKqTRgrwJEqBzO8l7b3D1/nOJuITI4rB94hbAYblkfeDzd8Jg9lOND3\u002BGb64bwyPB9gCAIku3XXu2w8nbI/Y8e/u8cO7bPo9P5ZDsS9qcAk9LfGbP8mDFguMunLYvSXJY7VxbGVyTqnQRYlpXIO\u002Bv1wbNAfnFhKU\u002B1nI\u002BGSVRYlpUG2LaduP/k8jzPa0dYvVjk2cqJZGhSpW3baYAbmYTAuWM5rp6c4\u002BZSkXLeSLkfm\u002By64deZiQGNRuO/v/PeaDabmT81H4u2rQbLnAAAAABJRU5ErkJggg==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAANaSURBVEhLtZXPayNlGMc/M6HTBrW1zRZxFdllklN/LBWNXV126UUoInvwoP4BgudePNi1l9IKnnaPC0IDwsKyBT3VU3dpRWsPbZOIbjYhC8mkyjKJcdtpkpnMPB7alGQyqS7oBx6G93nf9/m\u002Bz/O\u002B77zwfyIiftd/jtLe2NnZkVAoBGeIiwiapmFZVnNhYeHjtbW1e/4xPUmlUvJvKRWL8sPm5sHs7Ox1f5x21PZGr1UH0R8Oo6jq84lEInH12rX3/f0tOgRaiMiZBmDbNqqqMjo6OnT3zp2VmZmZ9/xx6CXQi7u7Fb76vkDTFVRVpVgsks/ncTxvZHlpaSUSibzhn/NMAtmnLp/9XGXzicPQ0BCxWAzTNMk8fMjL58\u002Bf6x8YeBsY9M87JZlMioiI67qB9s2vB/LaSkm0e/vy\u002B0HjdMMdxxERkYsXLnwBvNIes3OTW9\u002BAuosIh4d13g095XXb5MNvs7iui\u002Bd5tI52qK\u002BvqyI\u002Bx6lEoP2peFQVhx8/Gmcj1QAEEQ/Pc49nidd1DDsFTrpFgm10AHJuHREhovV19LXPb6crJf\u002Bq7aZHIlnl0/Uqt39TuDI4yIPsX9SdA1RVbRsbTLeAb9Vjtwp8smHx9eNDtv\u002BoYdsqrit898FFFEXpzCCAbgFfBqXB55AXFTh0oOKQN6q8o7/A1anIyaV7xgz8dZ/VnkCtAo06g80Kt6/oaCHl9D/5Txl0sLe3J57blEaj3mGu2\u002By4D47jiG03xLYbp2NERHRdXzjzHgB8Pn8DwzBYXV3l5s1bHB0dMT9/A4Byuczc3BxbWz/heR7Ly19iGAblssni4mJgoboEYrEYxaKBYZSoVCqUSiVisRgcZ8jly9NsbW0BEI/HefQoSzKZYnp62hfpmG6BaJR0Ok04HCYajXL//gPGx8ew7Qbr6\u002Bu4rkc2m6NcLjM5OcH29jbp9C9MTU0FbnbXe3Dp0iTpdBpd19F1nVwuh67rGIZBOBxmYmKcePxNkskUw8PDANRqNSKRSHuoYHZ3d0VEJJPJiGVZYlmWZDIZERExTVNM0xQREcuypFAodPnHxsaWgFfbY3a8ySMjI2\u002BFQqHriqI8FpFzQLO9/yw0TdP29/fzIrIBlFr\u002BDoGT9ksnxewPLGpvFMADTKDecv4NH2RqE6yAe1gAAAAASUVORK5CYII=",
               "WhenOpened": "2026-08-14T13:02:20.986Z"
             },
             {
@@ -78,7 +78,7 @@
               "RelativeDocumentMoniker": "Chatbot\\UIManager.cs",
               "ToolTip": "C:\\Users\\Student\\Documents\\Visual Studio 2022\\ST10463096-PROG6221-POE\\Chatbot\\Chatbot\\UIManager.cs",
               "RelativeToolTip": "Chatbot\\UIManager.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAQwMkAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAHoAAAAAAAAAAAAAAMkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-08-13T14:00:08.338Z",
               "EditorCaption": ""
@@ -91,7 +91,7 @@
               "RelativeDocumentMoniker": "Chatbot\\ResponseHandler.cs",
               "ToolTip": "C:\\Users\\Student\\Documents\\Visual Studio 2022\\ST10463096-PROG6221-POE\\Chatbot\\Chatbot\\ResponseHandler.cs",
               "RelativeToolTip": "Chatbot\\ResponseHandler.cs",
-              "ViewState": "AgIAAGEAAAAAAAAAAAAqwK8AAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAAAK8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-08-11T13:18:00.123Z",
               "EditorCaption": ""
@@ -104,7 +104,7 @@
               "RelativeDocumentMoniker": "Chatbot\\AudioPlayer.cs",
               "ToolTip": "C:\\Users\\Student\\Documents\\Visual Studio 2022\\ST10463096-PROG6221-POE\\Chatbot\\Chatbot\\AudioPlayer.cs",
               "RelativeToolTip": "Chatbot\\AudioPlayer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAAAAsAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-08-11T12:24:04.025Z",
               "EditorCaption": ""
@@ -129,7 +129,7 @@
               "RelativeDocumentMoniker": "Chatbot\\Chatbot.cs",
               "ToolTip": "C:\\Users\\Student\\Documents\\Visual Studio 2022\\ST10463096-PROG6221-POE\\Chatbot\\Chatbot\\Chatbot.cs",
               "RelativeToolTip": "Chatbot\\Chatbot.cs",
-              "ViewState": "AgIAADoAAAAAAAAAAAAQwBMAAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAAG4BAAAAAAAAAAAAABMAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-08-06T12:21:39.603Z",
               "EditorCaption": ""
