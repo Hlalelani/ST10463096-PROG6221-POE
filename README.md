@@ -15,7 +15,7 @@ This chatbot is designed to raise cybersecurity awareness among South African ci
 - Recognizing phishing emails
 - safe browsing habits two-factor authentication
 - Social engineering tactics
-the class my project has Program.cs, AudioPlayer.cs, Chatbot.cs, ResponseHandler.cs and UIManager.cs
+- the class my project has Program.cs, AudioPlayer.cs, Chatbot.cs, ResponseHandler.cs and UIManager.cs
 the application features a voice greeting, colorful ASCII art and structured console UI, IT is built with C# and .NET9, following object-oriented principles.
 
 ## features
